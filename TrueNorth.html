@@ -1307,12 +1307,40 @@ footer a{color:#a1a1a6}
   </div>
 </div>
 
-<!-- FEEDBACK MODAL（点击「提交反馈」弹出，内嵌 Tally 表单，点击时才加载） -->
+<!-- FEEDBACK MODAL（点击「提交反馈」弹出，Netlify Forms 原生表单，提交进站点后台，国内可直连） -->
 <div class="searchov" id="fbOv" hidden>
   <div class="searchov-bg" onclick="closeFeedback()"></div>
   <div class="searchov-panel" role="dialog" aria-label="提交反馈">
     <div class="searchov-top"><span class="si">💬</span><b style="flex:1;font-size:14.5px;color:var(--ink)">提交反馈</b><button class="searchov-esc" onclick="closeFeedback()">esc</button></div>
-    <div class="searchov-results" id="fbBody" style="padding:0"></div>
+    <div class="searchov-results" id="fbBody" style="padding:0">
+      <form name="truenorth-feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="fbForm" onsubmit="return submitFeedback(event)" style="padding:20px 24px 24px;display:flex;flex-direction:column;gap:13px">
+        <input type="hidden" name="form-name" value="truenorth-feedback">
+        <p style="display:none;margin:0"><label>请留空：<input name="bot-field"></label></p>
+        <div style="font-size:13px;color:var(--ink2);line-height:1.7">建议、问题、内容纠错或想看的主题都可以告诉我。提交后进入站点后台，无需登录。</div>
+        <label style="font-size:12.5px;color:var(--ink2);font-weight:600;display:flex;flex-direction:column;gap:6px">类型
+          <select name="type" style="border:1px solid rgba(0,0,0,.14);border-radius:10px;padding:9px 11px;font-size:14px;color:var(--ink);background:#fff">
+            <option>使用建议</option>
+            <option>内容纠错</option>
+            <option>发现 Bug</option>
+            <option>想看的主题</option>
+            <option>其他</option>
+          </select>
+        </label>
+        <label style="font-size:12.5px;color:var(--ink2);font-weight:600;display:flex;flex-direction:column;gap:6px">反馈内容 <span style="color:#c0392b">*</span>
+          <textarea name="message" required rows="5" placeholder="具体描述你的建议或遇到的问题…" style="border:1px solid rgba(0,0,0,.14);border-radius:10px;padding:10px 12px;font-size:14px;color:var(--ink);background:#fff;resize:vertical;font-family:inherit;line-height:1.6"></textarea>
+        </label>
+        <label style="font-size:12.5px;color:var(--ink2);font-weight:600;display:flex;flex-direction:column;gap:6px">联系方式（选填，方便回复）
+          <input name="contact" type="text" placeholder="邮箱 / 微信 / 任意" style="border:1px solid rgba(0,0,0,.14);border-radius:10px;padding:9px 11px;font-size:14px;color:var(--ink);background:#fff">
+        </label>
+        <div id="fbErr" style="display:none;font-size:13px;color:#c0392b"></div>
+        <button type="submit" class="btn primary" id="fbSubmit" style="align-self:flex-start">提交反馈</button>
+      </form>
+      <div id="fbThanks" style="display:none;padding:38px 26px;text-align:center;font-size:14.5px;color:var(--ink);line-height:1.8">
+        <div style="font-size:32px;margin-bottom:6px">✅</div>
+        已收到你的反馈，谢谢！<br>
+        <span style="color:var(--ink2);font-size:13px">提交已进入站点后台，你可以关闭此窗口。</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1554,7 +1582,7 @@ footer a{color:#a1a1a6}
     <p class="lead reveal d2" style="margin:10px auto 0">指北还在持续打磨，你的一句反馈（哪里有用 / 哪里别扭 / 想要什么）都会影响下一版。</p>
     <div class="reveal d3" style="margin-top:26px;display:flex;flex-direction:column;align-items:center;gap:12px">
       <button class="btn primary" onclick="openFeedback()">💬 提交反馈</button>
-      <span style="font-size:12.5px;color:var(--ink3)">点击弹窗填写 · 提交后进入你的 Tally 后台查看</span>
+      <span style="font-size:12.5px;color:var(--ink3)">点击弹窗填写 · 国内可直连，提交后进入站点后台查看</span>
     </div>
   </div>
 </section>
@@ -4838,18 +4866,31 @@ function srcReverse(name,kind){
   document.getElementById('srcOv').hidden=false;document.body.style.overflow='hidden';
 }
 function closeSrc(){var o=document.getElementById('srcOv');if(o){o.hidden=true;document.body.style.overflow='';}}
-/* ===== 反馈弹窗（Tally 表单，点击时才加载，关闭即卸载） ===== */
-var FB_FORM_ID=''; /* ← 在 https://tally.so 建好反馈表单后，把表单 ID 填这里（分享/嵌入链接里 tally.so/embed/XXXX 的 XXXX）。留空则弹窗显示接入指引。 */
+/* ===== 反馈弹窗（Netlify Forms 原生表单：提交进站点后台，国内可直连，无第三方 iframe） ===== */
 function openFeedback(){
-  var ov=document.getElementById('fbOv'),body=document.getElementById('fbBody');if(!ov||!body)return;
-  if(FB_FORM_ID){
-    body.innerHTML='<iframe src="https://tally.so/embed/'+FB_FORM_ID+'?alignLeft=1&transparentBackground=1&dynamicHeight=1" title="提交反馈" loading="lazy" style="width:100%;height:70vh;border:0;background:#fff;display:block"></iframe>';
-  }else{
-    body.innerHTML='<div style="padding:28px 26px;font-size:14px;color:var(--ink2);line-height:1.8">反馈表单待接入：<br>1. 去 <a href="https://tally.so" target="_blank" rel="noopener" style="color:var(--blue)">Tally.so</a> 免费建一个反馈表单；<br>2. 把表单 ID 填进代码里的 <code style="background:var(--bg2);padding:1px 6px;border-radius:5px">FB_FORM_ID</code>；<br>3. 提交的反馈会进你的 Tally 后台「Submissions」，也可开邮件通知 / 同步 Google Sheets。</div>';
-  }
+  var ov=document.getElementById('fbOv');if(!ov)return;
+  var form=document.getElementById('fbForm'),thanks=document.getElementById('fbThanks'),err=document.getElementById('fbErr');
+  if(form)form.style.display='flex';
+  if(thanks)thanks.style.display='none';
+  if(err){err.style.display='none';err.textContent='';}
   ov.hidden=false;document.body.style.overflow='hidden';
+  var t=document.querySelector('#fbForm textarea[name=message]');if(t)setTimeout(function(){try{t.focus();}catch(_){}},60);
 }
-function closeFeedback(){var ov=document.getElementById('fbOv');if(ov){ov.hidden=true;var b=document.getElementById('fbBody');if(b)b.innerHTML='';document.body.style.overflow='';}}
+function closeFeedback(){var ov=document.getElementById('fbOv');if(ov){ov.hidden=true;document.body.style.overflow='';}}
+function submitFeedback(e){
+  if(e&&e.preventDefault)e.preventDefault();
+  var form=document.getElementById('fbForm'),btn=document.getElementById('fbSubmit'),err=document.getElementById('fbErr'),thanks=document.getElementById('fbThanks');
+  if(!form)return false;
+  if(err){err.style.display='none';err.textContent='';}
+  if(btn){btn.disabled=true;btn.textContent='提交中…';}
+  var fd=new FormData(form),pairs=[];
+  fd.forEach(function(v,k){pairs.push(encodeURIComponent(k)+'='+encodeURIComponent(v));});
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:pairs.join('&')})
+    .then(function(r){if(!r||!r.ok)throw new Error('status '+(r&&r.status));form.reset();form.style.display='none';if(thanks)thanks.style.display='block';})
+    .catch(function(){if(err){err.style.display='block';err.textContent='提交失败，请稍后再试，或直接联系我。';}})
+    .finally(function(){if(btn){btn.disabled=false;btn.textContent='提交反馈';}});
+  return false;
+}
 function runSearch(q){
   var box=document.getElementById('searchResults');if(!box)return;
   q=(q||'').trim();
