@@ -1307,6 +1307,15 @@ footer a{color:#a1a1a6}
   </div>
 </div>
 
+<!-- FEEDBACK MODAL（点击「提交反馈」弹出，内嵌 Tally 表单，点击时才加载） -->
+<div class="searchov" id="fbOv" hidden>
+  <div class="searchov-bg" onclick="closeFeedback()"></div>
+  <div class="searchov-panel" role="dialog" aria-label="提交反馈">
+    <div class="searchov-top"><span class="si">💬</span><b style="flex:1;font-size:14.5px;color:var(--ink)">提交反馈</b><button class="searchov-esc" onclick="closeFeedback()">esc</button></div>
+    <div class="searchov-results" id="fbBody" style="padding:0"></div>
+  </div>
+</div>
+
 <!-- HERO -->
 <header class="hero">
   <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
@@ -1543,14 +1552,9 @@ footer a{color:#a1a1a6}
     <div class="eyebrow reveal" style="color:var(--blue)">Feedback · 反馈</div>
     <h2 class="h2 reveal d1">用得怎么样？说两句</h2>
     <p class="lead reveal d2" style="margin:10px auto 0">指北还在持续打磨，你的一句反馈（哪里有用 / 哪里别扭 / 想要什么）都会影响下一版。</p>
-    <!-- 方式一 · 内嵌 Tally 表单：取消下面 iframe 注释，把 src 换成你的 Tally 嵌入链接（形如 https://tally.so/embed/你的表单ID?transparentBackground=1&dynamicHeight=1） -->
-    <!--
-    <iframe src="https://tally.so/embed/你的表单ID?transparentBackground=1&dynamicHeight=1" title="指北反馈" loading="lazy" style="width:100%;max-width:640px;height:520px;border:1px solid var(--line);border-radius:16px;background:#fff;margin:26px auto 0;display:block"></iframe>
-    -->
-    <!-- 方式二（默认）· 外链按钮：把 href 换成你的 Tally 表单链接（形如 https://tally.so/r/你的表单ID） -->
     <div class="reveal d3" style="margin-top:26px;display:flex;flex-direction:column;align-items:center;gap:12px">
-      <a class="btn primary" href="https://tally.so/" target="_blank" rel="noopener">提交反馈 ↗</a>
-      <span style="font-size:12.5px;color:var(--ink3)">想内嵌表单？取消本区块上方 iframe 注释、填入你的 Tally 链接即可。</span>
+      <button class="btn primary" onclick="openFeedback()">💬 提交反馈</button>
+      <span style="font-size:12.5px;color:var(--ink3)">点击弹窗填写 · 提交后进入你的 Tally 后台查看</span>
     </div>
   </div>
 </section>
@@ -4834,6 +4838,18 @@ function srcReverse(name,kind){
   document.getElementById('srcOv').hidden=false;document.body.style.overflow='hidden';
 }
 function closeSrc(){var o=document.getElementById('srcOv');if(o){o.hidden=true;document.body.style.overflow='';}}
+/* ===== 反馈弹窗（Tally 表单，点击时才加载，关闭即卸载） ===== */
+var FB_FORM_ID=''; /* ← 在 https://tally.so 建好反馈表单后，把表单 ID 填这里（分享/嵌入链接里 tally.so/embed/XXXX 的 XXXX）。留空则弹窗显示接入指引。 */
+function openFeedback(){
+  var ov=document.getElementById('fbOv'),body=document.getElementById('fbBody');if(!ov||!body)return;
+  if(FB_FORM_ID){
+    body.innerHTML='<iframe src="https://tally.so/embed/'+FB_FORM_ID+'?alignLeft=1&transparentBackground=1&dynamicHeight=1" title="提交反馈" loading="lazy" style="width:100%;height:70vh;border:0;background:#fff;display:block"></iframe>';
+  }else{
+    body.innerHTML='<div style="padding:28px 26px;font-size:14px;color:var(--ink2);line-height:1.8">反馈表单待接入：<br>1. 去 <a href="https://tally.so" target="_blank" rel="noopener" style="color:var(--blue)">Tally.so</a> 免费建一个反馈表单；<br>2. 把表单 ID 填进代码里的 <code style="background:var(--bg2);padding:1px 6px;border-radius:5px">FB_FORM_ID</code>；<br>3. 提交的反馈会进你的 Tally 后台「Submissions」，也可开邮件通知 / 同步 Google Sheets。</div>';
+  }
+  ov.hidden=false;document.body.style.overflow='hidden';
+}
+function closeFeedback(){var ov=document.getElementById('fbOv');if(ov){ov.hidden=true;var b=document.getElementById('fbBody');if(b)b.innerHTML='';document.body.style.overflow='';}}
 function runSearch(q){
   var box=document.getElementById('searchResults');if(!box)return;
   q=(q||'').trim();
@@ -4855,7 +4871,7 @@ function runSearch(q){
 }
 document.addEventListener('keydown',function(e){
   if((e.ctrlKey||e.metaKey)&&(e.key==='k'||e.key==='K')){e.preventDefault();openSearch();}
-  else if(e.key==='Escape'){var o=document.getElementById('searchOv');if(o&&!o.hidden)closeSearch();var s=document.getElementById('srcOv');if(s&&!s.hidden)closeSrc();}
+  else if(e.key==='Escape'){var o=document.getElementById('searchOv');if(o&&!o.hidden)closeSearch();var s=document.getElementById('srcOv');if(s&&!s.hidden)closeSrc();var fb=document.getElementById('fbOv');if(fb&&!fb.hidden)closeFeedback();}
 });
 
 const revObserver=new IntersectionObserver(es=>{
