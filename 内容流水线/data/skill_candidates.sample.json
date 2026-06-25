@@ -1,0 +1,126 @@
+[
+  {
+    "id": "cand-brainstorming",
+    "name": "brainstorming · 先问再做",
+    "desc": "动手前一次只问一个问题，把需求里的空格逐个问清，再给方案。",
+    "task": ["learn", "code"],
+    "scenario": "提需求时 AI 总爱脑补默认值、输出时灵时不灵。",
+    "difficulty": "新手友好",
+    "input": "一句粗糙的需求",
+    "output": "对齐后的需求 + 两三个方案与推荐",
+    "install": "npx skills add obra/superpowers",
+    "prompt": "我想做一件事【填你要干的事】。但你先别急着动手……一次只问我一个问题。",
+    "tags": ["需求澄清"],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "obra/superpowers README",
+        "url": "https://github.com/obra/superpowers",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "README 中 brainstorming skill 段落：动手前一次问一个问题"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务明确、有安装方式与 Prompt，可直接复用。",
+    "relatedTool": "superpowers",
+    "relatedGlossary": ["Prompt"],
+    "parentProjectId": "superpowers"
+  },
+  {
+    "id": "cand-teach",
+    "name": "teach · 让 AI 当你的老师",
+    "desc": "记得住你进度的 AI 老师，系统教你任何东西。",
+    "task": ["learn"],
+    "scenario": "想用 AI 系统学一样东西，而不是零散问答。",
+    "difficulty": "新手友好",
+    "input": "你想学什么",
+    "output": "按你进度推进的讲解与练习",
+    "install": "npx skills add mattpocock/skills --skill teach",
+    "prompt": "/teach 你想学的东西",
+    "tags": ["学习"],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills README",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "README 中 teach skill：记得住你进度的 AI 老师"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "relatedTool": "mattpocock-skills",
+    "relatedGlossary": [],
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-article-outline",
+    "name": "长文提纲生成",
+    "desc": "文章里提到的一个写作能力：先列结构化提纲再展开。",
+    "task": ["research"],
+    "scenario": "写长文 / 报告前先搭骨架。",
+    "difficulty": "新手友好",
+    "input": "主题",
+    "output": "结构化提纲",
+    "install": "",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "某公众号文章",
+        "url": "https://mp.weixin.qq.com/s/example",
+        "sourceType": "article",
+        "sourceName": "微信公众号",
+        "sourceAuthor": "佚名",
+        "sourceDate": "2026-06",
+        "extractedFrom": "文中提到：先让 AI 列提纲，再逐段展开"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：用途明确，但缺少安装方式 / 可复制 Prompt，需补全后再决定。",
+    "relatedTool": "",
+    "relatedGlossary": [],
+    "parentProjectId": ""
+  },
+  {
+    "id": "cand-vague-tool",
+    "name": "某 AI 工具",
+    "desc": "",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "某文章",
+        "url": "https://mp.weixin.qq.com/s/example2",
+        "sourceType": "article",
+        "sourceName": "微信公众号",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "文中一句话提到了这个工具名，没有说明怎么用"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "不建议收录：只是工具名，没有明确用途和使用方式。",
+    "relatedTool": "",
+    "relatedGlossary": [],
+    "parentProjectId": ""
+  }
+]

@@ -1,0 +1,22 @@
+# 私有聊天导出，不进仓库
+chat记录/
+
+# 早期草稿 / 内部工具导出（不对外）
+AI_.html
+工作记录/
+
+# 可再生成的打包产物（源码在根目录已有 TrueNorth.html + 评审文档/）
+*.zip
+TrueNorth_MVP_v1_Final_Review/
+
+# Node / 验证临时文件
+node_modules/
+_walk/
+_*.js
+_*.py
+_*.txt
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

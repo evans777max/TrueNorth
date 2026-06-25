@@ -1,0 +1,25 @@
+[
+  {
+    "sourceUrl": "https://github.com/obra/superpowers",
+    "sourceType": "github_readme",
+    "sourceTitle": "obra/superpowers",
+    "sourceName": "GitHub",
+    "note": "测试 GitHub README 中的 Skill 候选提取",
+    "parentProjectId": "superpowers"
+  },
+  {
+    "sourceUrl": "https://github.com/mattpocock/skills",
+    "sourceType": "github_readme",
+    "sourceTitle": "mattpocock/skills",
+    "sourceName": "GitHub",
+    "note": "测试另一个 GitHub Skill 集合",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "sourceUrl": "https://mp.weixin.qq.com/",
+    "sourceType": "article",
+    "sourceTitle": "文章类来源占位",
+    "sourceName": "微信公众号",
+    "note": "文章类来源只做 parser 与 unsupported 流程测试；如需真实文章，后续由人工替换 sourceUrl"
+  }
+]

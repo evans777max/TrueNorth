@@ -1,0 +1,733 @@
+[
+  {
+    "id": "cand-quickstart-30-second-setup",
+    "name": "Quickstart (30-second setup)",
+    "desc": "Quickstart (30-second setup)",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Quickstart (30-second setup)"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-ask-you-which-issue-tracker-you-want-to-use-gith",
+    "name": "Ask you which issue tracker you want to use (GitHub, Linear, or local files)",
+    "desc": "Ask you which issue tracker you want to use (GitHub, Linear, or local files)",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Ask you which issue tracker you want to use (GitHub, Linear, or local files)"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-ask-you-what-labels-you-apply-to-tickets-when-yo",
+    "name": "Ask you what labels you apply to tickets when you triage them (/triage uses labels)",
+    "desc": "Ask you what labels you apply to tickets when you triage them (/triage uses labels)",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Ask you what labels you apply to tickets when you triage them (/triage uses labels)"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-ask-you-where-you-want-to-save-any-docs-we-creat",
+    "name": "Ask you where you want to save any docs we create",
+    "desc": "Ask you where you want to save any docs we create",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Ask you where you want to save any docs we create"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-why-these-skills-exist",
+    "name": "Why These Skills Exist",
+    "desc": "Why These Skills Exist",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Why These Skills Exist"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-1-the-agent-didn-t-do-what-i-want",
+    "name": "#1: The Agent Didn't Do What I Want",
+    "desc": "#1: The Agent Didn't Do What I Want",
+    "task": [
+      "agent"
+    ],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "#1: The Agent Didn't Do What I Want"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-grill-me-for-non-code-uses",
+    "name": "/grill-me - for non-code uses",
+    "desc": "[/grill-me](./skills/productivity/grill-me/SKILL.md) - for non-code uses",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "[/grill-me](./skills/productivity/grill-me/SKILL.md) - for non-code uses"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-2-the-agent-is-way-too-verbose",
+    "name": "#2: The Agent Is Way Too Verbose",
+    "desc": "#2: The Agent Is Way Too Verbose",
+    "task": [
+      "agent"
+    ],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "#2: The Agent Is Way Too Verbose"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-before-there-s-a-problem-when-a-lesson-inside-a-",
+    "name": "**BEFORE**: \"There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)\"",
+    "desc": "**BEFORE**: \"There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)\"",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "**BEFORE**: \"There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)\""
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-after-there-s-a-problem-with-the-materialization",
+    "name": "**AFTER**: \"There's a problem with the materialization cascade\"",
+    "desc": "**AFTER**: \"There's a problem with the materialization cascade\"",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "**AFTER**: \"There's a problem with the materialization cascade\""
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-3-the-code-doesn-t-work",
+    "name": "#3: The Code Doesn't Work",
+    "desc": "#3: The Code Doesn't Work",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "#3: The Code Doesn't Work"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-4-we-built-a-ball-of-mud",
+    "name": "#4: We Built A Ball Of Mud",
+    "desc": "#4: We Built A Ball Of Mud",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "#4: We Built A Ball Of Mud"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-to-prd-quizzes-you-about-which-modules-you-re-to",
+    "name": "/to-prd quizzes you about which modules you're touching before creating a PRD",
+    "desc": "[/to-prd](./skills/engineering/to-prd/SKILL.md) quizzes you about which modules you're touching before creating a PRD",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "[/to-prd](./skills/engineering/to-prd/SKILL.md) quizzes you about which modules you're touching before creating a PRD"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-summary",
+    "name": "Summary",
+    "desc": "Summary",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Summary"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-reference",
+    "name": "Reference",
+    "desc": "Reference",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Reference"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-engineering",
+    "name": "Engineering",
+    "desc": "Engineering",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Engineering"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-ask-matt-ask-which-skill-or-flow-fits-your-situa",
+    "name": "**ask-matt** — Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.",
+    "desc": "**[ask-matt](./skills/engineering/ask-matt/SKILL.md)** — Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "**[ask-matt](./skills/engineering/ask-matt/SKILL.md)** — Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo."
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-triage-move-issues-through-a-state-machine-of-tr",
+    "name": "**triage** — Move issues through a state machine of triage roles.",
+    "desc": "**[triage](./skills/engineering/triage/SKILL.md)** — Move issues through a state machine of triage roles.",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "**[triage](./skills/engineering/triage/SKILL.md)** — Move issues through a state machine of triage roles."
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-to-issues-break-any-plan-spec-or-prd-into-indepe",
+    "name": "**to-issues** — Break any plan, spec, or PRD into independently-grabbable issues using vertical slices.",
+    "desc": "**[to-issues](./skills/engineering/to-issues/SKILL.md)** — Break any plan, spec, or PRD into independently-grabbable issues using vertical slices.",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "**[to-issues](./skills/engineering/to-issues/SKILL.md)** — Break any plan, spec, or PRD into independently-grabbable issues using vertical slices."
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-productivity",
+    "name": "Productivity",
+    "desc": "Productivity",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Productivity"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-handoff-compact-the-current-conversation-into-a-",
+    "name": "**handoff** — Compact the current conversation into a handoff document so another agent can continue the work.",
+    "desc": "**[handoff](./skills/productivity/handoff/SKILL.md)** — Compact the current conversation into a handoff document so another agent can continue the work.",
+    "task": [
+      "agent"
+    ],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "**[handoff](./skills/productivity/handoff/SKILL.md)** — Compact the current conversation into a handoff document so another agent can continue the work."
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-misc",
+    "name": "Misc",
+    "desc": "Misc",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "Misc"
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "需人工判断：与指北定位（AI / Agent / 自动化 / 内容 / 研究 / 数据 / 代码 / 知识库）关联弱",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-migrate-to-shoehorn-migrate-test-files-from-as-t",
+    "name": "**migrate-to-shoehorn** — Migrate test files from as type assertions to @total-typescript/shoehorn.",
+    "desc": "**[migrate-to-shoehorn](./skills/misc/migrate-to-shoehorn/SKILL.md)** — Migrate test files from as type assertions to @total-typescript/shoehorn.",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "**[migrate-to-shoehorn](./skills/misc/migrate-to-shoehorn/SKILL.md)** — Migrate test files from as type assertions to @total-typescript/shoehorn."
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-scaffold-exercises-create-exercise-directory-str",
+    "name": "**scaffold-exercises** — Create exercise directory structures with sections, problems, solutions, and explainers.",
+    "desc": "**[scaffold-exercises](./skills/misc/scaffold-exercises/SKILL.md)** — Create exercise directory structures with sections, problems, solutions, and explainers.",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "**[scaffold-exercises](./skills/misc/scaffold-exercises/SKILL.md)** — Create exercise directory structures with sections, problems, solutions, and explainers."
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  },
+  {
+    "id": "cand-setup-pre-commit-set-up-husky-pre-commit-hooks-w",
+    "name": "**setup-pre-commit** — Set up Husky pre-commit hooks with lint-staged, Prettier, type checking, and tests.",
+    "desc": "**[setup-pre-commit](./skills/misc/setup-pre-commit/SKILL.md)** — Set up Husky pre-commit hooks with lint-staged, Prettier, type checking, and tests.",
+    "task": [],
+    "scenario": "",
+    "difficulty": "新手友好",
+    "input": "",
+    "output": "",
+    "install": "npx skills@latest add mattpocock/skills",
+    "prompt": "",
+    "tags": [],
+    "whyTrueNorth": "",
+    "sourceRefs": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "sourceType": "github_readme",
+        "sourceName": "GitHub",
+        "sourceAuthor": "",
+        "sourceDate": "",
+        "extractedFrom": "**[setup-pre-commit](./skills/misc/setup-pre-commit/SKILL.md)** — Set up Husky pre-commit hooks with lint-staged, Prettier, type checking, and tests."
+      }
+    ],
+    "reviewStatus": "pending",
+    "riskLevel": "low",
+    "note": "建议收录：任务、用途与来源齐全，可直接复用。",
+    "parentProjectId": "mattpocock-skills"
+  }
+]
