@@ -20,3 +20,9 @@ _*.txt
 # OS
 .DS_Store
 Thumbs.db
+
+# 内部记忆 / steering（含判断与内部备注，仅本地，不进仓库/分享包）
+.kiro/
+
+# 根目录聊天导出（私有）
+Kiro聊天记录_*
