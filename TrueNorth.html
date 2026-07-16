@@ -21,6 +21,9 @@
   --black:#000;
   --radius:22px;
   --ease:cubic-bezier(.22,.61,.36,1);
+  --bg-signal: #f0f7ff;
+  --bg-toolkit: #f7f5ff;
+  --bg-workbench: #f5faf7;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -52,6 +55,24 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;width:10
 .navlinks a:hover{color:var(--ink)}
 .navlinks a.active{color:var(--ink);font-weight:600}
 @media(max-width:680px){.navlinks{display:none}}
+.nav-burger{display:none;width:36px;height:36px;border:none;background:none;cursor:pointer;
+  position:relative;-webkit-tap-highlight-color:transparent}
+.nav-burger span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;
+  position:absolute;left:8px;transition:.3s var(--ease)}
+.nav-burger span:nth-child(1){top:11px}
+.nav-burger span:nth-child(2){top:17px}
+.nav-burger span:nth-child(3){top:23px}
+.nav-burger.open span:nth-child(1){transform:rotate(45deg);top:17px}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:rotate(-45deg);top:17px}
+@media(max-width:680px){
+  .nav-burger{display:block}
+  .navlinks.open{display:flex;position:fixed;top:52px;left:0;right:0;bottom:0;
+    background:var(--bg);flex-direction:column;padding:32px 24px;gap:0;z-index:999;
+    overflow-y:auto;animation:fadeIn .25s var(--ease)}
+  .navlinks.open a{font-size:18px;font-weight:600;padding:16px 0;border-bottom:1px solid var(--line)}
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* ===== reveal ===== */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
@@ -99,11 +120,14 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;width:10
 section{padding:110px 0;position:relative}
 .sec-dark{background:#000;color:#f5f5f7}
 .sec-grey{background:#eceef2}
+#signals{background:var(--bg-signal)}
+#toolkit{background:var(--bg-toolkit)}
+#workbench{background:var(--bg-workbench)}
 /* 模块分隔：浅色区之间加发丝线，强化层次 */
 section:not(.sec-dark){border-top:1px solid rgba(0,0,0,.07)}
 .eyebrow{font-size:14px;font-weight:600;letter-spacing:.4px;text-transform:uppercase}
-.h2{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:12px 0 18px}
-.lead{font-size:clamp(17px,2.2vw,21px);color:var(--ink2);max-width:720px;line-height:1.55;font-weight:400}
+.h2{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.025em;line-height:1.08;margin:12px 0 18px;text-wrap:balance}
+.lead{font-size:clamp(17px,2.2vw,21px);color:var(--ink2);max-width:720px;line-height:1.55;font-weight:400;text-wrap:pretty}
 .sec-dark .lead{color:#a1a1a6}
 
 /* ===== 模块折叠 ===== */
@@ -175,6 +199,11 @@ section.unfold-anim .foldbody :nth-child(n+7){animation-delay:.36s}
 .card .srclink{font-size:13px;font-weight:600;color:var(--ink3);padding:5px 12px;border:1px solid var(--line);
   border-radius:980px;transition:.25s var(--ease)}
 .card .srclink:hover{color:var(--ink);border-color:var(--ink3);background:var(--bg2)}
+.card::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;
+  transition:opacity .3s var(--ease);pointer-events:none;z-index:1;
+  background:radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%),
+    rgba(0,113,227,.06),transparent 60%)}
+.card:hover::before{opacity:1}
 
 /* ===== CURATED FEED ===== */
 .feedgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
@@ -199,6 +228,11 @@ section.unfold-anim .foldbody :nth-child(n+7){animation-delay:.36s}
 .feedcard .srclink{font-size:13px;font-weight:600;color:var(--ink3);padding:5px 12px;border:1px solid var(--line);
   border-radius:980px;transition:.25s var(--ease)}
 .feedcard .srclink:hover{color:var(--ink);border-color:var(--ink3);background:var(--bg2)}
+.feedcard::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;
+  transition:opacity .3s var(--ease);pointer-events:none;z-index:1;
+  background:radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%),
+    rgba(0,113,227,.06),transparent 60%)}
+.feedcard:hover::before{opacity:1}
 @media(max-width:760px){.feedgrid{grid-template-columns:1fr}}
 
 /* ===== AI 方案库 ===== */
@@ -225,6 +259,11 @@ section.unfold-anim .foldbody :nth-child(n+7){animation-delay:.36s}
 @media(max-width:760px){.tkgrid{grid-template-columns:1fr}}
 .tkbadge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:980px;
   background:linear-gradient(110deg,#5b8def,#a78bfa);color:#fff;margin-left:auto}
+.tkcard::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;
+  transition:opacity .3s var(--ease);pointer-events:none;z-index:1;
+  background:radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%),
+    rgba(0,113,227,.06),transparent 60%)}
+.tkcard:hover::before{opacity:1}
 
 /* ===== AI 信号雷达 ===== */
 .sigupd{display:inline-block;margin-left:8px;font-size:13px;font-weight:600;color:var(--c-trend)}
@@ -254,11 +293,16 @@ section.unfold-anim .foldbody :nth-child(n+7){animation-delay:.36s}
 .sigcard .siggo .arr{transition:transform .3s var(--ease)}
 .sigcard:hover .siggo .arr{transform:translateX(4px)}
 @media(max-width:760px){.siggrid{grid-template-columns:1fr}}
+.sigcard::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;
+  transition:opacity .3s var(--ease);pointer-events:none;z-index:1;
+  background:radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%),
+    rgba(0,113,227,.06),transparent 60%)}
+.sigcard:hover::before{opacity:1}
 
 /* ===== Synthesis / charts on home ===== */
 .statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:50px}
 .stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:30px 24px;text-align:center}
-.sec-dark .stat .num{font-size:clamp(38px,5vw,58px);font-weight:700;letter-spacing:-.03em;
+.sec-dark .stat .num{font-size:clamp(38px,5vw,58px);font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums;
   background:linear-gradient(120deg,#5b8def,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .stat .lab{font-size:14px;color:#a1a1a6;margin-top:8px;line-height:1.4}
 @media(max-width:760px){.statrow{grid-template-columns:1fr 1fr}}
@@ -896,6 +940,15 @@ a.logotile:hover .lt-name{color:var(--ink)}
 .job .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:7px}
 .job .tags span{font-size:12px;background:rgba(255,255,255,.07);padding:4px 10px;border-radius:980px;color:#a1a1a6}
 
+/* ===== card press / active states ===== */
+.card:active{transform:scale(.98);transition:transform .1s}
+.feedcard:active{transform:scale(.98);transition:transform .1s}
+.tkcard:active{transform:scale(.98);transition:transform .1s}
+.sigcard:active{transform:scale(.97);transition:transform .1s}
+
+/* ===== nav scroll shadow ===== */
+nav.scrolled{box-shadow:0 1px 12px rgba(0,0,0,.08)}
+
 footer{background:#000;color:#86868b;padding:60px 0;font-size:13px;line-height:1.7;text-align:center}
 footer a{color:#a1a1a6}
 
@@ -1219,6 +1272,14 @@ footer a{color:#a1a1a6}
 .sr-t{font-size:14px;color:var(--ink);font-weight:600}
 .sr-s{font-size:12.5px;color:var(--ink2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 @media(max-width:680px){.searchov-panel{margin-top:6vh;width:94vw}.navsearch{padding:4px 9px}}
+/* ===== 场景工作台 tabs ===== */
+.wb-tabs{display:flex;gap:8px;margin:28px 0 30px;flex-wrap:wrap}
+.wb-tab{font-size:14px;font-weight:600;padding:10px 20px;border-radius:980px;border:1px solid var(--line);
+  background:#fff;color:var(--ink2);cursor:pointer;transition:.25s var(--ease)}
+.wb-tab:hover{border-color:var(--ink3);color:var(--ink)}
+.wb-tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.wb-panel{animation:fadeIn .3s var(--ease)}
+
 /* ===== 论文工作台 ===== */
 .paper-stages{margin-top:34px;display:flex;flex-direction:column;gap:26px}
 .paper-sh{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:14px;padding-left:12px;border-left:3px solid var(--c-method)}
@@ -1263,6 +1324,241 @@ footer a{color:#a1a1a6}
 .gk-chip{font-size:12px;color:#3b6ca8;background:rgba(59,108,168,.1);border:1px solid rgba(59,108,168,.22);border-radius:980px;padding:4px 12px;cursor:pointer;transition:all .15s var(--ease)}
 .gk-chip:hover{background:#3b6ca8;color:#fff;border-color:#3b6ca8}
 @media(max-width:680px){.gk-types{grid-template-columns:1fr}.gk-goal,.gk-block{padding-left:0}}
+/* ===== Knowledge Graph Overlay ===== */
+.kgraph-btn{font-size:13px;font-weight:600;padding:9px 16px;border-radius:980px;border:1px solid var(--line);
+  background:#fff;color:var(--ink);cursor:pointer;transition:.25s var(--ease)}
+.kgraph-btn:hover{border-color:var(--ink3);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.kgraph-ov{position:fixed;inset:0;z-index:2000;display:none;flex-direction:column;background:#07070d}
+.kgraph-ov.open{display:flex;animation:deckIn .4s var(--ease)}
+.kgraph-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 24px;
+  border-bottom:1px solid rgba(255,255,255,.08);flex:none;background:rgba(10,10,18,.7)}
+.kgraph-title{font-size:15px;font-weight:800;color:#f5f5f7}
+.kgraph-search{flex:1;max-width:320px;position:relative}
+.kgraph-search input{width:100%;font-size:13px;padding:9px 14px 9px 32px;border-radius:980px;
+  border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#f5f5f7;
+  outline:none;transition:.25s var(--ease);font-family:inherit}
+.kgraph-search input::placeholder{color:#6e6e78}
+.kgraph-search input:focus{border-color:rgba(91,141,239,.5);background:rgba(255,255,255,.09)}
+.kgraph-search .si{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#6e6e78;font-size:13px;pointer-events:none}
+.kgraph-close{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);color:#f5f5f7;cursor:pointer;font-size:17px;
+  display:flex;align-items:center;justify-content:center;transition:.2s var(--ease);flex:none}
+.kgraph-close:hover{background:rgba(255,255,255,.12);transform:rotate(90deg)}
+.kgraph-canvas{flex:1;min-height:0;position:relative;overflow:hidden}
+.kgraph-canvas canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.kgraph-legend{position:absolute;bottom:16px;left:16px;display:flex;gap:12px;flex-wrap:wrap;
+  font-size:11px;color:rgba(255,255,255,.5)}
+.kgraph-legend span{display:inline-flex;align-items:center;gap:5px;font-weight:600}
+.kgraph-legend span::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--lc);box-shadow:0 0 6px var(--lc)}
+.kgraph-hint{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:11px;
+  color:rgba(255,255,255,.35);background:rgba(0,0,0,.5);padding:5px 14px;border-radius:980px;pointer-events:none}
+.kgraph-info{position:absolute;top:14px;right:14px;width:min(300px,calc(100vw - 28px));max-height:calc(100% - 80px);
+  overflow-y:auto;background:rgba(18,18,24,.92);border:1px solid rgba(255,255,255,.1);border-radius:16px;
+  padding:18px 20px;backdrop-filter:blur(12px);box-shadow:0 12px 40px rgba(0,0,0,.4);z-index:3}
+.kgraph-info .kgi-cat{font-size:11px;font-weight:700;letter-spacing:.04em;margin-bottom:4px}
+.kgraph-info .kgi-t{font-size:18px;font-weight:800;color:#f5f5f7}
+.kgraph-info .kgi-cn{font-size:13px;color:rgba(255,255,255,.5);font-weight:600;margin-left:8px}
+.kgraph-info .kgi-e{font-size:13px;color:rgba(255,255,255,.65);line-height:1.6;margin-top:10px}
+.kgraph-info .kgi-rell{font-size:11px;font-weight:700;color:rgba(255,255,255,.35);margin-top:14px}
+.kgraph-info .kgi-rel{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.kgraph-info .kgi-chip{font-size:12px;font-weight:600;padding:4px 12px;border-radius:980px;cursor:pointer;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);transition:.2s var(--ease)}
+.kgraph-info .kgi-chip:hover{border-color:rgba(91,141,239,.6);color:#5b8def}
+.kgraph-info .kgi-go{margin-top:14px;display:inline-block;font-size:12px;font-weight:600;color:#5b8def;
+  padding:6px 14px;border:1px solid rgba(91,141,239,.3);border-radius:980px;transition:.2s var(--ease)}
+.kgraph-info .kgi-go:hover{background:rgba(91,141,239,.12)}
+.kgraph-info .kgi-close{position:absolute;top:10px;right:12px;border:none;background:rgba(255,255,255,.06);
+  font-size:13px;color:rgba(255,255,255,.5);cursor:pointer;width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center}
+.kgraph-info .kgi-close:hover{background:rgba(255,255,255,.12)}
+/* ===== Hero search + chips ===== */
+.hero-search{position:relative;max-width:520px;width:100%;margin:28px auto 0}
+.hero-search input{width:100%;font-size:15px;padding:14px 18px 14px 44px;border-radius:980px;
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#f5f5f7;
+  font-family:inherit;outline:none;cursor:pointer;transition:.3s var(--ease);backdrop-filter:blur(8px)}
+.hero-search input::placeholder{color:rgba(255,255,255,.4)}
+.hero-search input:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.1)}
+.hero-search .hsi{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.4);font-size:16px;pointer-events:none}
+.hero-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hchip{font-size:13px;font-weight:500;padding:7px 16px;border-radius:980px;
+  border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);cursor:pointer;transition:.25s var(--ease)}
+.hchip:hover{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.08)}
+@media(max-width:480px){.hero-chips{gap:6px}.hchip{font-size:12px;padding:6px 12px}}
+/* ===== Role-based quick path ===== */
+.role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.role-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;cursor:pointer;
+  transition:.25s var(--ease);display:flex;align-items:flex-start;gap:14px}
+.role-card:hover{border-color:var(--blue);box-shadow:0 8px 20px rgba(0,0,0,.06);transform:translateY(-3px)}
+.role-card .rc-icon{font-size:24px;flex:none;line-height:1}
+.role-card .rc-body{flex:1}
+.role-card .rc-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.role-card .rc-desc{font-size:13px;color:var(--ink2);line-height:1.5}
+.role-card .rc-path{font-size:12px;font-weight:600;color:var(--blue);margin-top:8px}
+@media(max-width:560px){.role-grid{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PREMIUM OUTER MODULE ENHANCEMENTS
+   Appended — do NOT modify any existing rules above
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* 1. Eyebrow gets a subtle underline accent */
+.eyebrow::after{content:'';display:block;width:32px;height:2px;margin-top:8px;
+  background:linear-gradient(90deg,var(--blue),var(--c-method));border-radius:2px;opacity:.6}
+
+/* 2. Card glass overlay on hover */
+.card:hover::after,.feedcard:hover::after,.tkcard:hover::after{content:'';position:absolute;inset:0;
+  border-radius:inherit;background:linear-gradient(160deg,rgba(255,255,255,.06),transparent 60%);
+  pointer-events:none;z-index:1}
+
+/* 3. Signal card inner glow */
+.sigcard::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:linear-gradient(to bottom,var(--sc),transparent 80%);border-radius:3px 0 0 3px;
+  opacity:0;transition:opacity .3s var(--ease)}
+.sigcard:hover::after{opacity:1}
+
+/* 4. Route nodes depth */
+.route-node{position:relative;overflow:hidden}
+.route-node::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;
+  border-radius:50%;background:var(--rc);opacity:.04;filter:blur(40px);pointer-events:none}
+.route-node:hover::before{opacity:.1;transform:scale(1.5)}
+
+/* 5. Section transition — soft gradient fade divider */
+section:not(.sec-dark)::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:min(800px,80%);height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.08) 20%,rgba(0,0,0,.08) 80%,transparent);
+  pointer-events:none}
+
+/* 6. Stat numbers in dark section — enhanced glow */
+.sec-dark .stat{position:relative;overflow:hidden}
+.sec-dark .stat::before{content:'';position:absolute;inset:-20%;
+  background:radial-gradient(circle at 50% 120%,rgba(91,141,239,.08),transparent 70%);pointer-events:none}
+
+/* 7. Takeaway cards — numbered accent glow */
+.ta .tn{position:relative}
+.ta .tn::after{content:'';position:absolute;inset:-8px;border-radius:50%;
+  background:linear-gradient(120deg,var(--c-org),var(--c-method));opacity:.08;filter:blur(12px);z-index:-1}
+
+/* 8. H2 heading — subtle shimmer on scroll-reveal */
+.h2.in{position:relative}
+.h2.in::after{content:'';position:absolute;top:0;left:-10%;width:120%;height:100%;
+  background:linear-gradient(90deg,transparent 30%,rgba(255,255,255,.15) 50%,transparent 70%);
+  background-size:200% 100%;animation:h2shimmer 2s ease forwards;pointer-events:none;
+  -webkit-background-clip:text;background-clip:text;mix-blend-mode:overlay;opacity:0}
+@keyframes h2shimmer{0%{opacity:.8;background-position:200% 0}100%{opacity:0;background-position:-200% 0}}
+
+/* 9. Footer premium feel */
+footer{background:linear-gradient(to bottom,var(--bg),#eceef2);border-top:none}
+
+/* ===== Signals: horizontal scroll carousel ===== */
+.siggrid{display:flex!important;grid-template-columns:unset!important;
+  overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin-top:38px;
+  padding-bottom:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.siggrid::-webkit-scrollbar{display:none}
+.siggrid .sigcard{flex:none;width:min(340px,80vw);scroll-snap-align:start;
+  border-radius:16px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.siggrid .sigcard:first-child{margin-left:0}
+/* Carousel fade edges */
+#signals .wrap{position:relative}
+#signals .wrap::after{content:'';position:absolute;top:0;right:0;bottom:0;width:80px;
+  background:linear-gradient(to right,transparent,var(--bg-signal,var(--bg)));pointer-events:none;z-index:2}
+@media(max-width:680px){
+  .siggrid .sigcard{width:85vw}
+  #signals .wrap::after{width:40px}
+}
+/* Carousel nav arrows */
+.sig-nav{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+.sig-arr{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:.2s var(--ease)}
+.sig-arr:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sig-arr:active{transform:scale(.92)}
+@media(max-width:680px){.sig-nav{display:none}}
+
+/* ===== Toolkit: Bento Grid layout ===== */
+.tkgrid{grid-template-columns:repeat(3,1fr)!important;grid-auto-rows:auto}
+.tkgrid .tkcard:nth-child(1){grid-column:span 2;grid-row:span 1;
+  background:linear-gradient(135deg,#f8f6ff 0%,#fff 50%,#f6f9ff 100%);
+  border-color:color-mix(in srgb,var(--tkc) 25%,var(--line))}
+.tkgrid .tkcard:nth-child(2){grid-row:span 2}
+.tkgrid .tkcard:nth-child(1) h4{font-size:22px}
+.tkgrid .tkcard:nth-child(2) h4{font-size:20px}
+/* Responsive fallback */
+@media(max-width:1024px){
+  .tkgrid{grid-template-columns:repeat(2,1fr)!important}
+  .tkgrid .tkcard:nth-child(1){grid-column:span 2}
+  .tkgrid .tkcard:nth-child(2){grid-row:span 1}
+}
+@media(max-width:680px){
+  .tkgrid{grid-template-columns:1fr!important}
+  .tkgrid .tkcard:nth-child(1),.tkgrid .tkcard:nth-child(2){grid-column:span 1;grid-row:span 1}
+  .tkgrid .tkcard:nth-child(1) h4,.tkgrid .tkcard:nth-child(2) h4{font-size:18px}
+}
+
+/* ===== Feed: magazine layout ===== */
+.feedgrid{grid-template-columns:1fr 1fr!important}
+.feedgrid .feedcard:first-child{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0;
+  padding:0;overflow:hidden;border-radius:22px;min-height:200px}
+.feedgrid .feedcard:first-child .fhead{grid-column:1/-1;padding:22px 26px 0}
+.feedgrid .feedcard:first-child h4{font-size:22px;padding:0 26px;grid-column:1/-1}
+.feedgrid .feedcard:first-child .fsrc{padding:0 26px;grid-column:1/-1}
+.feedgrid .feedcard:first-child .finsight{padding:0 26px 22px;grid-column:1/-1;font-size:15px}
+.feedgrid .feedcard:first-child .ffoot{padding:14px 26px;grid-column:1/-1;background:var(--bg2);border-top:1px solid var(--line)}
+@media(max-width:900px){
+  .feedgrid{grid-template-columns:1fr!important}
+  .feedgrid .feedcard:first-child{grid-template-columns:1fr;min-height:unset}
+}
+
+/* ===== Quickstart: horizontal timeline ===== */
+.route{display:grid!important;grid-template-columns:repeat(6,1fr);gap:12px;position:relative;margin-top:40px}
+.route::before{content:'';position:absolute;top:24px;left:5%;right:5%;height:2px;
+  background:linear-gradient(90deg,var(--c-trend),var(--c-org),var(--c-talent),var(--c-build),var(--c-method),#2dd4bf);
+  border-radius:2px;opacity:.3;z-index:0}
+.route-node{flex-direction:column!important;text-align:center;padding:16px 10px!important;
+  position:relative;z-index:1;border:none!important;border-radius:16px!important;
+  background:#fff!important;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.route-node:hover{box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-4px)}
+.route-node .rdot{width:36px;height:36px;border-radius:50%;background:var(--rc);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;
+  margin:0 auto 10px;box-shadow:0 4px 12px color-mix(in srgb,var(--rc) 30%,transparent)}
+.route-node .rbody{display:flex;flex-direction:column;align-items:center;gap:4px}
+.route-node .rk{font-size:11px;color:var(--ink3);font-weight:600;order:-1}
+.route-node .rt{font-size:14px;font-weight:700;color:var(--ink)}
+.route-node .rd{font-size:12px;color:var(--ink2);line-height:1.4;display:none}
+.route-node .rbtn{font-size:11px;font-weight:600;color:var(--rc);margin-top:6px}
+@media(max-width:900px){
+  .route{grid-template-columns:repeat(3,1fr)!important}
+  .route::before{display:none}
+}
+@media(max-width:560px){
+  .route{grid-template-columns:repeat(2,1fr)!important}
+}
+
+/* ===== Glossary: graph-first mode tabs ===== */
+.gloss-modes{display:flex;align-items:center;gap:8px;margin:24px 0 0;flex-wrap:wrap}
+.gm-btn{font-size:13px;font-weight:600;padding:9px 18px;border-radius:980px;border:1px solid rgba(255,255,255,.15);
+  background:transparent;color:rgba(255,255,255,.6);cursor:pointer;transition:.25s var(--ease)}
+.gm-btn:hover{border-color:rgba(255,255,255,.35);color:#fff}
+.gm-btn.active{background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.5);color:#fff}
+.gm-search{position:relative;margin-left:auto}
+.gm-search input{width:200px;font-size:13px;padding:9px 14px 9px 32px;border-radius:980px;
+  border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#f5f5f7;
+  outline:none;transition:.25s var(--ease);font-family:inherit}
+.gm-search input::placeholder{color:#6e6e78}
+.gm-search input:focus{border-color:rgba(167,139,250,.5);background:rgba(255,255,255,.09);width:260px}
+.gm-search .si{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#6e6e78;font-size:13px;pointer-events:none}
+.gloss-view{margin-top:28px}
+.gloss-view.gloss-graph{margin-top:0}
+.gloss-graph .kgraph-canvas{border-radius:20px;border:1px solid rgba(255,255,255,.08);
+  background:#07070d;margin-top:24px}
+@media(max-width:680px){
+  .gm-search{margin-left:0;width:100%;margin-top:8px}
+  .gm-search input,.gm-search input:focus{width:100%}
+  .gloss-graph .kgraph-canvas{height:50vh!important;border-radius:14px}
+}
+/* ===== Route node visited state ===== */
+.route-node.visited .rdot{background:var(--rc)!important;color:#fff;box-shadow:0 0 12px color-mix(in srgb,var(--rc) 50%,transparent)}
+.route-node.visited{border-color:color-mix(in srgb,var(--rc) 30%,var(--line))!important;background:color-mix(in srgb,var(--rc) 4%,#fff)!important}
+.route-node.visited .rbtn::after{content:' ✓';color:var(--rc)}
 </style>
 </head>
 <body>
@@ -1270,13 +1566,13 @@ footer a{color:#a1a1a6}
 <nav id="nav">
   <div class="wrap">
     <div class="logo"><span class="dot"></span> 指北 <span class="logo-en">TrueNorth</span></div>
-    <div class="navlinks">
+    <button class="nav-burger" id="navBurger" onclick="toggleMobileNav()" aria-label="菜单"><span></span><span></span><span></span></button>
+    <div class="navlinks" id="navLinks">
       <a data-spy="quickstart" onclick="go('#quickstart')">开始</a>
       <a data-spy="insights" onclick="go('#insights')">洞察</a>
       <a data-spy="feed" onclick="go('#feed')">案例</a>
       <a data-spy="toolkit" onclick="go('#toolkit')">方案</a>
-      <a data-spy="paper" onclick="go('#paper')">论文</a>
-      <a data-spy="gongkao" onclick="go('#gongkao')">公考</a>
+      <a data-spy="workbench" onclick="go('#workbench')">场景</a>
       <a data-spy="glossary" onclick="go('#glossary')">词典</a>
       <a data-spy="map" onclick="go('#map')">来源</a>
       <a data-spy="about" onclick="go('#about')">关于</a>
@@ -1357,6 +1653,17 @@ footer a{color:#a1a1a6}
       <button class="btn ghost" onclick="goSkillLib()">找可用 Skill</button>
       <button class="btn ghost" onclick="go('#glossary')">从 0 读懂 AI</button>
     </div>
+    <div class="hero-search reveal d4">
+      <span class="hsi">⌕</span>
+      <input type="text" placeholder="搜索 Agent、RAG、写论文、Skill…" onclick="openSearch()" readonly>
+    </div>
+    <div class="hero-chips reveal d4">
+      <span class="hchip" onclick="openSearch();setTimeout(()=>{document.getElementById('globalSearch').value='Agent';runSearch('Agent')},100)">Agent</span>
+      <span class="hchip" onclick="openSearch();setTimeout(()=>{document.getElementById('globalSearch').value='RAG';runSearch('RAG')},100)">RAG</span>
+      <span class="hchip" onclick="openSearch();setTimeout(()=>{document.getElementById('globalSearch').value='Skill';runSearch('Skill')},100)">Skill</span>
+      <span class="hchip" onclick="go('#workbench')">论文写作</span>
+      <span class="hchip" onclick="openQuiz()">能力自测</span>
+    </div>
   </div>
   <div class="scrollhint">SCROLL<div class="m"></div></div>
 </header>
@@ -1372,8 +1679,14 @@ footer a{color:#a1a1a6}
       <a class="route-node" onclick="go('#insights')" style="--rc:#5b8def"><span class="rdot">02</span><div class="rbody"><span class="rk">看判断</span><span class="rt">关键洞察</span><span class="rd">从多来源内容中提炼共识和变化方向。</span><span class="rbtn">看关键洞察 →</span></div></a>
       <a class="route-node" onclick="go('#feed')" style="--rc:var(--c-talent)"><span class="rdot">03</span><div class="rbody"><span class="rk">看案例</span><span class="rt">实战案例</span><span class="rd">看企业、团队和个人如何真实使用 AI。</span><span class="rbtn">看实战案例 →</span></div></a>
       <a class="route-node" onclick="go('#toolkit')" style="--rc:var(--c-build)"><span class="rdot">04</span><div class="rbody"><span class="rk">找方案 / 用 Skill</span><span class="rt">方案库 · Skill 库</span><span class="rd">找到可以上手的项目、工具和可复用 Skill。</span><span class="rbtn">找方案与 Skill →</span></div></a>
-      <a class="route-node" onclick="go('#paper')" style="--rc:#a78bfa"><span class="rdot">05</span><div class="rbody"><span class="rk">写论文</span><span class="rt">论文工作台</span><span class="rd">按选题→检索→写作→修改的阶段，调用对应 Skill 与工具。</span><span class="rbtn">进论文工作台 →</span></div></a>
+      <a class="route-node" onclick="go('#workbench')" style="--rc:#a78bfa"><span class="rdot">05</span><div class="rbody"><span class="rk">按场景用</span><span class="rt">场景工作台</span><span class="rd">论文写作、公考备考——按阶段调用 Skill 与工具。</span><span class="rbtn">进场景工作台 →</span></div></a>
       <a class="route-node" onclick="go('#glossary')" style="--rc:#2dd4bf"><span class="rdot">06</span><div class="rbody"><span class="rk">学概念</span><span class="rt">AI 词典</span><span class="rd">补齐 AI、Agent、RAG、MCP、Skill 等概念。</span><span class="rbtn">学相关概念 →</span></div></a>
+    </div>
+    <div id="routeProgress" style="font-size:12px;color:var(--ink3);margin-top:12px;font-weight:600;text-align:center"></div>
+    <!-- 按角色找路径 -->
+    <div class="role-section reveal d4" style="margin-top:48px">
+      <div style="font-size:15px;font-weight:700;color:var(--ink2);margin-bottom:18px">或者按你的角色，找最短路径</div>
+      <div class="role-grid" id="roleGrid"></div>
     </div>
   </div>
 </section>
@@ -1386,6 +1699,10 @@ footer a{color:#a1a1a6}
     <p class="lead reveal d2">从实时情报源里筛出真正有信息增量的——前沿论文、大模型动态、工程实践与行业拐点。每条都用大白话重写，并追溯到原始出处。<span class="sigupd" id="sigUpd"></span></p>
     <div class="sigsrcbar reveal d3" id="sigSrcBar"></div>
     <div class="siggrid" id="sigGrid"></div>
+    <div class="sig-nav" id="sigNav">
+      <button class="sig-arr sig-prev" onclick="scrollSig(-1)" aria-label="上一页">&#8249;</button>
+      <button class="sig-arr sig-next" onclick="scrollSig(1)" aria-label="下一页">&#8250;</button>
+    </div>
     <p class="reveal" style="color:var(--ink3);font-size:13px;margin-top:24px">信号经 <a href="https://www.ai-pulse-lab.com/" target="_blank" rel="noopener" style="color:var(--blue)">AI Pulse Lab ↗</a>、<a href="https://github.com/KKKKhazix/khazix-skills" target="_blank" rel="noopener" style="color:var(--blue)">AI 热点 aihot ↗</a> 等情报源雷达发现并筛选，解读为本站重写；𝕏 类链接至原作者，论文类可进一步检索 arXiv。定位为近期高价值信号精选，非实时。</p>
   </div>
 </section>
@@ -1398,6 +1715,9 @@ footer a{color:#a1a1a6}
     <p class="lead reveal d2">把全库内容——17 篇深度解读、12 个实战案例、35 个落地方案——里的硬信息抽出来，按「数据 / 变化 / 工具 / 框架」四类输出。每条都标注来源，点击可跳到对应指北解读。</p>
     <div class="digtabs reveal d3" id="digtabs"></div>
     <div class="diggrid" id="diggrid"></div>
+    <div class="reveal d3" style="margin-top:32px;margin-bottom:-20px">
+      <button class="gm-btn" id="insightQuizBtn" onclick="startInsightQuiz()" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7)">🎯 判断挑战 · 你同意这些洞察吗？</button>
+    </div>
     <div class="takeaways" style="margin-top:54px">
       <div class="ta reveal d1" style="background:#161617;color:#f5f5f7">
         <div class="tn">01</div><h4>价值从「中转」转向「闭环」</h4>
@@ -1467,6 +1787,9 @@ footer a{color:#a1a1a6}
       <div class="filters" id="tkFilters"></div>
       <div class="searchbox"><span class="si">⌕</span><input id="tkSearch" placeholder="搜索方案 / 关键词…" autocomplete="off"></div>
     </div>
+    <div class="reveal" style="margin-bottom:20px">
+      <button class="gm-btn" onclick="startToolkitChallenge()" style="border-color:var(--c-build);color:var(--c-build)">⚡ 30分钟挑战 · 选一个任务，给你一条最短路径</button>
+    </div>
     <div class="tkgrid" id="tkgrid"></div>
     <div class="empty" id="tkEmpty" hidden>没有匹配内容，换个关键词或主题试试。</div>
   </div>
@@ -1487,53 +1810,80 @@ footer a{color:#a1a1a6}
   </div>
 </section>
 
-<!-- 论文写作工作台 -->
-<section id="paper" class="sec-grey">
+<!-- 场景工作台（合并论文 + 公考） -->
+<section id="workbench" class="sec-grey">
   <div class="wrap">
-    <div class="eyebrow reveal" style="color:var(--c-method)">Paper Workbench</div>
-    <h2 class="h2 reveal d1">论文写作工作台</h2>
-    <p class="lead reveal d2">从全库精选对写论文真正有用的 Skill 与工具，按「选题 → 检索综述 → 读文献 → 实证 → 修改答辩」排好，点开即用。这些是 AI 工具里对研究 / 写作有帮助的那部分，学术规范与引用仍需你自己把关。</p>
-    <div class="paper-stages" id="paperStages"></div>
-  </div>
-</section>
-
-<!-- 公考备考 SOP（测试模块） -->
-<section id="gongkao">
-  <div class="wrap">
-    <div class="eyebrow reveal" style="color:#3b6ca8">Civil Service Exam · BETA</div>
-    <h2 class="h2 reveal d1">公考备考 SOP <span class="gk-betatag">🧪 测试阶段</span></h2>
-    <p class="lead reveal d2">这一模块是个<b>例外</b>：它不走本站「可溯源 Skill」的路子，而是基于公考通用备考规律，由指北整理的一套<b>原创备考 SOP</b>。覆盖国考、省考、选调（含紧急选调）、事业编等——它们殊途同归，主线高度通用，差异主要在报考条件、科目命名与命题侧重。</p>
-    <div class="gk-beta reveal d2">
-      <span class="gk-bdot">🧪</span>
-      <div class="gk-beta-t"><b>测试阶段说明：</b>本模块为原创整理，尚未像其他模块那样逐条接地权威来源，仅作备考思路参考，<b>不构成报考建议</b>；具体科目、时间、报考条件<b>一切以当年官方招考公告为准</b>。欢迎反馈，我们会持续校准。</div>
+    <div class="eyebrow reveal" style="color:var(--c-method)">Workbench · 场景工作台</div>
+    <h2 class="h2 reveal d1">按场景调用 Skill 与工具</h2>
+    <p class="lead reveal d2">选一个你正在做的事——论文写作、公考备考——我们把全库里对这个场景真正有用的 Skill 和工具按阶段排好，点开即用。</p>
+    <div class="wb-tabs reveal d3" id="wbTabs">
+      <button class="wb-tab active" data-wb="paper" onclick="switchWb('paper')">📝 论文写作</button>
+      <button class="wb-tab" data-wb="gongkao" onclick="switchWb('gongkao')">📋 公考备考 <span class="gk-betatag">BETA</span></button>
     </div>
-    <h3 class="gk-subh reveal">先分清你考的是哪一类</h3>
-    <div class="gk-types reveal" id="gkTypes"></div>
-    <div class="gk-conv reveal">殊途同归：<b>笔试（行测 + 申论，或其变体）→ 面试（结构化 / 无领导小组）</b>是绝大多数公考的共同主线，方法论可通用迁移。下面这套 7 步 SOP 适用于上述各类考试，按你的考试类型在「① 定位选岗」一步做针对性微调即可。</div>
-    <div class="gk-stages reveal" id="gkStages"></div>
-    <p class="reveal" style="color:var(--ink3);font-size:13px;margin-top:26px">说明：本 SOP 为指北基于公考通用规律的原创整理（测试阶段），未逐条接地外部权威来源；行测数量关系 / 资料分析等涉及计算的题目，AI 易算错，答案务必自己核对。</p>
-  </div>
-</section>
-
-<!-- AI 词典 -->
-<section id="glossary">
-  <div class="wrap">
-    <div class="eyebrow reveal" style="color:#a78bfa">AI Dictionary</div>
-    <h2 class="h2 reveal d1">读懂 AI 的 7 站学习路线</h2>
-    <p class="lead reveal d2">把 72 个核心概念编成 7 站学习路线，从「AI 是什么」一路走到「怎么治理风险」。每站默认先看几个关键词，点开看全部；也支持通读故事和卡片速记。</p>
-    <div class="libtools reveal d3">
-      <div class="filters" id="glossFilters"></div>
-      <div class="gtools">
-        <div class="searchbox"><span class="si">⌕</span><input id="glossSearch" placeholder="搜索概念 / 关键词…" autocomplete="off"></div>
-        <button class="gtoggle gtoggle-story" id="glossStory">📖 通读故事</button>
-        <button class="gtoggle gtoggle-study" id="glossStudy">🎴 卡片速记</button>
-        <button class="gtoggle" id="glossToggle">展开全部</button>
+    <!-- 论文面板 -->
+    <div class="wb-panel" id="wbPaper">
+      <p class="reveal" style="font-size:14px;color:var(--ink2);margin-bottom:24px">从全库精选对写论文真正有用的 Skill 与工具，按「选题 → 检索综述 → 读文献 → 实证 → 修改答辩」排好，点开即用。学术规范与引用仍需你自己把关。</p>
+      <div class="paper-stages" id="paperStages"></div>
+    </div>
+    <!-- 公考面板 -->
+    <div class="wb-panel" id="wbGongkao" style="display:none">
+      <div class="gk-beta reveal d2">
+        <span class="gk-bdot">🧪</span>
+        <div class="gk-beta-t"><b>测试阶段说明：</b>本模块为原创整理，尚未像其他模块那样逐条接地权威来源，仅作备考思路参考，<b>不构成报考建议</b>；具体科目、时间、报考条件<b>一切以当年官方招考公告为准</b>。欢迎反馈，我们会持续校准。</div>
       </div>
+      <h3 class="gk-subh reveal">先分清你考的是哪一类</h3>
+      <div class="gk-types reveal" id="gkTypes"></div>
+      <div class="gk-conv reveal">殊途同归：<b>笔试（行测 + 申论，或其变体）→ 面试（结构化 / 无领导小组）</b>是绝大多数公考的共同主线，方法论可通用迁移。下面这套 7 步 SOP 适用于上述各类考试，按你的考试类型在「① 定位选岗」一步做针对性微调即可。</div>
+      <div class="gk-stages reveal" id="gkStages"></div>
+      <p class="reveal" style="color:var(--ink3);font-size:13px;margin-top:26px">说明：本 SOP 为指北基于公考通用规律的原创整理（测试阶段），未逐条接地外部权威来源；行测数量关系 / 资料分析等涉及计算的题目，AI 易算错，答案务必自己核对。</p>
     </div>
-    <div class="glossgrid" id="glossgrid"></div>
-    <div class="empty" id="glossEmpty" hidden>没有匹配内容，换个关键词或主题试试。</div>
-    <p class="reveal" style="color:var(--ink3);font-size:13px;margin-top:26px">概念释义整理、加工自《3万字讲透 AI 必懂的 60 个核心概念》· 产品经理老王霸；奶茶比喻与章节故事线、互链为本站重新编排，完整原文见
-      <a href="https://mp.weixin.qq.com/s/V0rKCf4xxWD01se5bu56VQ" target="_blank" rel="noopener" style="color:var(--blue)">原文 ↗</a></p>
+  </div>
+</section>
+
+<!-- AI 词典 — 知识图谱为主界面 -->
+<section id="glossary" class="sec-dark" style="padding-bottom:60px">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="color:#a78bfa;-webkit-text-fill-color:#a78bfa">AI Dictionary</div>
+    <h2 class="h2 reveal d1" style="color:#f5f5f7">72 个核心概念，一张活地图</h2>
+    <p class="lead reveal d2" style="color:#a1a1a6">点击任意节点探索概念——节点越大连接越多；拖拽漫游、滚轮缩放。切到列表或故事模式深度阅读。</p>
+    <div class="gloss-modes reveal d3">
+      <button class="gm-btn active" data-gm="graph" onclick="switchGlossMode('graph')">🕸 自由探索</button>
+      <button class="gm-btn" data-gm="story" onclick="startGraphStory()">📖 故事路径</button>
+      <button class="gm-btn" data-gm="flash" onclick="startGraphQuiz()">🎴 概念挑战</button>
+      <button class="gm-btn" data-gm="list" onclick="switchGlossMode('list')" style="opacity:.5">📋 传统列表</button>
+      <div class="gm-search"><span class="si">⌕</span><input id="kgraphSearch" placeholder="搜索概念…" autocomplete="off" oninput="kgSearchFocus(this.value)"></div>
+    </div>
+    <div id="exploredCount" style="font-size:12px;color:rgba(255,255,255,.35);margin-top:10px;font-weight:600"></div>
+  </div>
+  <!-- 图谱视图（默认） -->
+  <div class="gloss-view gloss-graph active" id="glossViewGraph">
+    <div class="kgraph-canvas" id="kgraphBox" style="height:min(70vh,600px);position:relative;overflow:hidden">
+      <canvas id="kgraphCanvas"></canvas>
+      <div class="kgraph-hint">拖拽节点 · 滚轮缩放 · 点击查看</div>
+      <div class="kgraph-legend" id="kgraphLegend"></div>
+      <div class="kgraph-info" id="kgraphInfo" hidden></div>
+    </div>
+  </div>
+  <!-- 列表视图 -->
+  <div class="gloss-view gloss-list" id="glossViewList" style="display:none">
+    <div class="wrap">
+      <div class="libtools">
+        <div class="filters" id="glossFilters"></div>
+        <div class="gtools">
+          <div class="searchbox"><span class="si">⌕</span><input id="glossSearch" placeholder="搜索概念…" autocomplete="off"></div>
+          <button class="gtoggle" id="glossToggle">展开全部</button>
+        </div>
+      </div>
+      <div class="glossgrid" id="glossgrid"></div>
+      <div class="empty" id="glossEmpty" hidden>没有匹配内容。</div>
+    </div>
+  </div>
+  <!-- 故事/速记是全屏overlay，直接由模式按钮触发 -->
+  <div class="gloss-view" id="glossViewStory" style="display:none"></div>
+  <div class="gloss-view" id="glossViewFlash" style="display:none"></div>
+  <div class="wrap" style="margin-top:20px">
+    <p class="reveal" style="color:#6e6e73;font-size:13px">概念释义整理、加工自《3万字讲透 AI 必懂的 60 个核心概念》· 产品经理老王霸；奶茶比喻与章节故事线、互链为本站重新编排，完整原文见
+      <a href="https://mp.weixin.qq.com/s/V0rKCf4xxWD01se5bu56VQ" target="_blank" rel="noopener" style="color:#a78bfa">原文 ↗</a></p>
   </div>
 </section>
 
@@ -1575,15 +1925,11 @@ footer a{color:#a1a1a6}
 </section>
 
 <!-- FEEDBACK · 反馈 -->
-<section id="feedback" style="padding:72px 0">
-  <div class="wrap" style="text-align:center">
-    <div class="eyebrow reveal" style="color:var(--blue)">Feedback · 反馈</div>
-    <h2 class="h2 reveal d1">用得怎么样？说两句</h2>
-    <p class="lead reveal d2" style="margin:10px auto 0">指北还在持续打磨，你的一句反馈（哪里有用 / 哪里别扭 / 想要什么）都会影响下一版。</p>
-    <div class="reveal d3" style="margin-top:26px;display:flex;flex-direction:column;align-items:center;gap:12px">
-      <button class="btn primary" onclick="openFeedback()">💬 提交反馈</button>
-      <span style="font-size:12.5px;color:var(--ink3)">点击弹窗填写 · 国内可直连，提交后进入站点后台查看</span>
-    </div>
+<section id="feedback" style="padding:32px 0 24px">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+    <span style="font-size:14px;color:var(--ink2)">用得怎么样？</span>
+    <button class="btn primary" style="font-size:13px;padding:9px 20px" onclick="openFeedback()">💬 提交反馈</button>
+    <span style="font-size:12px;color:var(--ink3)">你的一句话会影响下一版</span>
   </div>
 </section>
 
@@ -4305,6 +4651,27 @@ const GEXTRA={
 };
 </script>
 <script>
+/* Glossary lookup map (used by Knowledge Graph and other features) */
+const _GLOSSARY_MAP=(typeof GLOSSARY!=='undefined')?new Map(GLOSSARY.map(g=>[g.en,g])):new Map();
+
+/* Mobile nav toggle */
+function toggleMobileNav(){
+  const btn=document.getElementById('navBurger');
+  const links=document.getElementById('navLinks');
+  if(!btn||!links)return;
+  btn.classList.toggle('open');
+  links.classList.toggle('open');
+}
+
+/* Workbench tab switch (论文/公考) */
+function switchWb(tab){
+  document.getElementById('wbPaper').style.display=tab==='paper'?'':'none';
+  document.getElementById('wbGongkao').style.display=tab==='gongkao'?'':'none';
+  document.querySelectorAll('.wb-tab').forEach(b=>{
+    b.classList.toggle('active',b.dataset.wb===tab);
+  });
+}
+
 /* ============ 渲染：筛选 + 卡片 ============ */
 const grid=document.getElementById('grid');
 const filtersEl=document.getElementById('filters');
@@ -4981,7 +5348,12 @@ const spyObserver=new IntersectionObserver(es=>{
     }
   });
 },{rootMargin:'-45% 0px -50% 0px'});
-['quickstart','signals','insights','feed','toolkit','paper','gongkao','library','glossary','map','about'].forEach(id=>{const el=document.getElementById(id);if(el)spyObserver.observe(el);});
+['quickstart','signals','insights','feed','toolkit','workbench','library','glossary','map','about'].forEach(id=>{const el=document.getElementById(id);if(el)spyObserver.observe(el);});
+
+/* Nav scroll shadow */
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').classList.toggle('scrolled',window.scrollY>10);
+},{passive:true});
 
 /* ============ AI 方案库渲染 ============ */
 let tkCat='all';let tkSearch='';let tkView='projects';
@@ -5683,7 +6055,7 @@ function studyJump(en){
   }
   studyIdx=idx;renderCard();
 }
-document.getElementById('glossStudy').addEventListener('click',openStudy);
+if(document.getElementById('glossStudy'))document.getElementById('glossStudy').addEventListener('click',openStudy);
 document.getElementById('studyPrev').addEventListener('click',()=>studyGo(-1));
 document.getElementById('studyNext').addEventListener('click',()=>studyGo(1));
 document.getElementById('studyShuffle').addEventListener('click',()=>{
@@ -5810,7 +6182,7 @@ function storyJump(en){
   if(chIdx!==storyCh&&chIdx>=0){renderStoryChapter(chIdx);requestAnimationFrame(()=>requestAnimationFrame(doScroll));}
   else doScroll();
 }
-document.getElementById('glossStory').addEventListener('click',openStory);
+if(document.getElementById('glossStory'))document.getElementById('glossStory').addEventListener('click',openStory);
 document.addEventListener('keydown',e=>{
   if(!storyEl.classList.contains('open'))return;
   if(e.key==='Escape')closeStory();
@@ -5958,10 +6330,19 @@ document.getElementById('glossToggle').addEventListener('click',()=>{
 document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
 document.querySelectorAll('.stat .num').forEach(el=>numObserver.observe(el));
 
+/* Mouse-position glow for cards */
+document.querySelectorAll('.card,.feedcard,.tkcard,.sigcard').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    el.style.setProperty('--mouse-x',(e.clientX-r.left)+'px');
+    el.style.setProperty('--mouse-y',(e.clientY-r.top)+'px');
+  });
+});
+
 /* ============ 模块折叠 / 隐藏 ============ */
 (function setupFold(){
   document.querySelectorAll('section').forEach(sec=>{
-    if(['map','about','quickstart','contentpath','signals','insights'].includes(sec.id))return; // 导航/核心区不折叠
+    if(['map','about','quickstart','contentpath','signals','insights','glossary','feedback'].includes(sec.id))return; // 导航/核心区不折叠
     const wrap=sec.querySelector(':scope > .wrap');
     if(!wrap)return;
     const h2=wrap.querySelector(':scope > .h2');
@@ -5974,9 +6355,8 @@ document.querySelectorAll('.stat .num').forEach(el=>numObserver.observe(el));
     wrap.appendChild(body);
     // 标题可点击
     h2.classList.add('foldable');
-    // 默认折叠
-    sec.classList.add('folded');
-    body.style.maxHeight='0';
+    // 默认展开（用户可点击标题手动折叠）
+    body.style.maxHeight='none';
     const toggle=()=>{
       if(sec.classList.contains('folded')){
         sec.classList.remove('folded');
@@ -5994,6 +6374,822 @@ document.querySelectorAll('.stat .num').forEach(el=>numObserver.observe(el));
     });
   });
 })();
+
+/* ============ Knowledge Graph ============ */
+var _kg=null;
+function openKGraph(){
+  // Graph is now inline in glossary section — just init it
+  document.getElementById('kgraphInfo').hidden=true;
+  var si=document.getElementById('kgraphSearch');if(si)si.value='';
+  setTimeout(initKGraph,80);
+}
+function closeKGraph(){
+  // No overlay to close; graph stays inline
+  if(_kg)_kg.running=false;
+}
+function initKGraph(){
+  if(_kg&&_kg.inited){_kg.running=true;_kg.resize();requestAnimationFrame(_kg.loop);return;}
+  var box=document.getElementById('kgraphBox');
+  var canvas=document.getElementById('kgraphCanvas');
+  var dpr=window.devicePixelRatio||1;
+  function resize(){
+    var nW=box.clientWidth,nH=box.clientHeight;if(!nW||!nH)return;
+    canvas.width=nW*dpr;canvas.height=nH*dpr;
+    canvas.style.width=nW+'px';canvas.style.height=nH+'px';
+  }
+  resize();
+  var ctx=canvas.getContext('2d');
+  var W=canvas.width/dpr,H=canvas.height/dpr;
+
+  var catColors={};Object.keys(GCATS).forEach(function(k){catColors[k]=GCATS[k].color;});
+  var nodes=[],edges=[];
+  var cx=W/2,cy=H/2;
+  var degreeMap={};
+
+  GLOSSARY.forEach(function(g){degreeMap[g.en]=0;});
+  GLOSSARY.forEach(function(g){
+    var ext=GEXTRA[g.en];
+    if(ext&&ext.r)ext.r.forEach(function(rn){
+      if(_GLOSSARY_MAP.has(rn)){degreeMap[g.en]++;degreeMap[rn]=(degreeMap[rn]||0)+1;}
+    });
+  });
+
+  GLOSSARY.forEach(function(g,i){
+    var catKeys=Object.keys(GCATS);
+    var catIdx=catKeys.indexOf(g.cat);
+    var catAngle=(catIdx/catKeys.length)*Math.PI*2-Math.PI/2;
+    var jitter=(Math.random()-0.5)*1.2;
+    var spread=Math.min(W,H)*0.3;
+    nodes.push({id:g.en,cn:g.cn,cat:g.cat,e:g.e,degree:degreeMap[g.en]||0,
+      x:cx+Math.cos(catAngle+jitter)*spread*(0.5+Math.random()*0.5),
+      y:cy+Math.sin(catAngle+jitter)*spread*(0.5+Math.random()*0.5),
+      vx:0,vy:0,pinned:false,targetAlpha:1,alpha:0});
+  });
+  var nodeMap=new Map(nodes.map(function(n){return[n.id,n];}));
+  GLOSSARY.forEach(function(g){
+    var ext=GEXTRA[g.en];
+    if(ext&&ext.r)ext.r.forEach(function(rn){if(nodeMap.has(rn))edges.push({a:g.en,b:rn});});
+  });
+  var maxDeg=Math.max(1,Math.max.apply(null,nodes.map(function(n){return n.degree;})));
+
+  var legend=document.getElementById('kgraphLegend');
+  legend.innerHTML=Object.keys(GCATS).map(function(k){return '<span style="--lc:'+GCATS[k].color+'">'+GCATS[k].name+'</span>';}).join('');
+
+  var zoom=1,panX=0,panY=0;
+  var selected=null,hovered=null,dragging=null;
+  var simAlpha=1,running=true;
+  var time=0;
+  var BASE_R=4,MAX_R=14;
+
+  function nodeRadius(n){return BASE_R+(n.degree/maxDeg)*(MAX_R-BASE_R);}
+  function toWorld(sx,sy){return[(sx-panX)/zoom,(sy-panY)/zoom];}
+  function hitTest(sx,sy){
+    var wc=toWorld(sx,sy),wx=wc[0],wy=wc[1];
+    for(var i=nodes.length-1;i>=0;i--){
+      var n=nodes[i];var r=(nodeRadius(n)+5)/zoom;
+      var dx=n.x-wx,dy=n.y-wy;
+      if(dx*dx+dy*dy<r*r)return n;
+    }
+    return null;
+  }
+
+  function simulate(){
+    if(simAlpha<0.001)return;
+    simAlpha*=0.994;
+    nodes.forEach(function(n){if(!n.pinned){n.vx*=0.86;n.vy*=0.86;}});
+    for(var i=0;i<nodes.length;i++){
+      for(var j=i+1;j<nodes.length;j++){
+        var a=nodes[i],b=nodes[j];
+        var dx=a.x-b.x,dy=a.y-b.y;
+        var d2=dx*dx+dy*dy;if(d2<4)d2=4;
+        var d=Math.sqrt(d2);
+        var repulse=400/d2*simAlpha;
+        var fx=dx/d*repulse,fy=dy/d*repulse;
+        if(!a.pinned){a.vx+=fx;a.vy+=fy;}
+        if(!b.pinned){b.vx-=fx;b.vy-=fy;}
+      }
+    }
+    edges.forEach(function(e){
+      var a=nodeMap.get(e.a),b=nodeMap.get(e.b);if(!a||!b)return;
+      var dx=b.x-a.x,dy=b.y-a.y;var d=Math.sqrt(dx*dx+dy*dy)||1;
+      var f=(d-100)*0.012*simAlpha;
+      var fx2=dx/d*f,fy2=dy/d*f;
+      if(!a.pinned){a.vx+=fx2;a.vy+=fy2;}
+      if(!b.pinned){b.vx-=fx2;b.vy-=fy2;}
+    });
+    nodes.forEach(function(n){
+      if(n.pinned)return;
+      n.vx+=(cx-n.x)*0.0004*simAlpha;
+      n.vy+=(cy-n.y)*0.0004*simAlpha;
+      n.x+=n.vx;n.y+=n.vy;
+    });
+  }
+
+  function render(){
+    time++;
+    simulate();
+    var cW=canvas.width/dpr,cH=canvas.height/dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.fillStyle='#07070d';ctx.fillRect(0,0,cW,cH);
+    ctx.save();ctx.translate(panX,panY);ctx.scale(zoom,zoom);
+
+    var neighbors=new Set();
+    var selEdgeSet=new Set();
+    if(selected){
+      edges.forEach(function(e,i){
+        if(e.a===selected.id||e.b===selected.id){
+          selEdgeSet.add(i);
+          neighbors.add(e.a===selected.id?e.b:e.a);
+        }
+      });
+    }
+    nodes.forEach(function(n){
+      var isSel=n===selected,isNb=neighbors.has(n.id);
+      n.targetAlpha=(selected&&!isSel&&!isNb)?0.12:1;
+      n.alpha+=(n.targetAlpha-n.alpha)*0.08;
+    });
+
+    edges.forEach(function(e,i){
+      var a=nodeMap.get(e.a),b=nodeMap.get(e.b);if(!a||!b)return;
+      var hl=selEdgeSet.has(i);
+      var alpha=hl?0.6:Math.min(a.alpha,b.alpha)*0.15;
+      if(alpha<0.01)return;
+      ctx.globalAlpha=alpha;
+      var col=hl?(catColors[selected.cat]||'#5b8def'):'#4a4a5a';
+      ctx.strokeStyle=col;ctx.lineWidth=(hl?2.5:0.7)/zoom;
+      var mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+      var dx=b.x-a.x,dy=b.y-a.y;
+      var dist=Math.sqrt(dx*dx+dy*dy+1);
+      var off=dist*0.1;
+      var cpx=mx+dy/dist*off,cpy=my-dx/dist*off;
+      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(cpx,cpy,b.x,b.y);ctx.stroke();
+      if(hl){
+        var t=(time%120)/120;
+        var px=(1-t)*(1-t)*a.x+2*(1-t)*t*cpx+t*t*b.x;
+        var py=(1-t)*(1-t)*a.y+2*(1-t)*t*cpy+t*t*b.y;
+        ctx.globalAlpha=0.8;ctx.fillStyle='#fff';
+        ctx.beginPath();ctx.arc(px,py,2.5/zoom,0,Math.PI*2);ctx.fill();
+      }
+    });
+    ctx.globalAlpha=1;
+
+    nodes.forEach(function(n){
+      var isSel=n===selected,isHov=n===hovered,isNb=neighbors.has(n.id);
+      var r=nodeRadius(n)/zoom*(isSel?1.4:isHov?1.2:1);
+      var col=catColors[n.cat]||'#5b8def';
+      ctx.globalAlpha=n.alpha;
+      if(isSel||isHov||isNb){
+        var glow=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,r*3);
+        glow.addColorStop(0,col+'44');glow.addColorStop(1,'transparent');
+        ctx.fillStyle=glow;ctx.beginPath();ctx.arc(n.x,n.y,r*3,0,Math.PI*2);ctx.fill();
+      }
+      ctx.fillStyle=col;ctx.shadowColor=col;ctx.shadowBlur=isSel?12:isNb?6:3;
+      ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
+      if(isSel){ctx.strokeStyle='#fff';ctx.lineWidth=1.5/zoom;ctx.beginPath();ctx.arc(n.x,n.y,r+2/zoom,0,Math.PI*2);ctx.stroke();}
+      var showLabel=zoom>0.5||(isSel||isNb||isHov||n.degree>2);
+      if(showLabel){
+        var fontSize=Math.max(8,Math.min(12,11/zoom));
+        ctx.fillStyle=isSel?'#fff':(n.alpha<0.4?'rgba(255,255,255,.15)':'rgba(255,255,255,.7)');
+        ctx.font=(isSel||isNb?'700':'500')+' '+fontSize+'px -apple-system,sans-serif';
+        ctx.textAlign='center';ctx.textBaseline='top';
+        ctx.fillText(n.cn||n.id,n.x,n.y+r+4/zoom);
+      }
+    });
+    ctx.globalAlpha=1;ctx.restore();
+  }
+
+  function loop(){if(!running)return;render();requestAnimationFrame(loop);}
+
+  window.addEventListener('resize',function(){resize();W=canvas.width/dpr;H=canvas.height/dpr;cx=W/2;cy=H/2;});
+
+  var panStart=null,isPan=false,didDrag=false;
+  canvas.addEventListener('pointerdown',function(e){
+    var rect=canvas.getBoundingClientRect();
+    var sx=e.clientX-rect.left,sy=e.clientY-rect.top;
+    didDrag=false;
+    var n=hitTest(sx,sy);
+    if(n){dragging=n;n.pinned=true;simAlpha=Math.max(simAlpha,0.3);canvas.style.cursor='grabbing';}
+    else{isPan=true;panStart={x:e.clientX,y:e.clientY,px:panX,py:panY};canvas.style.cursor='grabbing';}
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener('pointermove',function(e){
+    var rect=canvas.getBoundingClientRect();
+    var sx=e.clientX-rect.left,sy=e.clientY-rect.top;
+    if(dragging){var wc=toWorld(sx,sy);dragging.x=wc[0];dragging.y=wc[1];dragging.vx=0;dragging.vy=0;simAlpha=Math.max(simAlpha,0.08);didDrag=true;}
+    else if(isPan&&panStart){var dx2=e.clientX-panStart.x,dy2=e.clientY-panStart.y;if(Math.abs(dx2)+Math.abs(dy2)>4)didDrag=true;panX=panStart.px+dx2;panY=panStart.py+dy2;}
+    else{hovered=hitTest(sx,sy);canvas.style.cursor=hovered?'pointer':'grab';}
+  });
+  function pointerEnd(e){
+    if(dragging){dragging.pinned=false;dragging=null;}
+    isPan=false;panStart=null;canvas.style.cursor='grab';
+    canvas.releasePointerCapture(e.pointerId);
+  }
+  canvas.addEventListener('pointerup',pointerEnd);
+  canvas.addEventListener('pointercancel',pointerEnd);
+  canvas.addEventListener('click',function(e){
+    if(didDrag)return;
+    var rect=canvas.getBoundingClientRect();
+    var sx=e.clientX-rect.left,sy=e.clientY-rect.top;
+    var n=hitTest(sx,sy);
+    if(n){selected=n;showKGInfo(n);}
+    else{selected=null;document.getElementById('kgraphInfo').hidden=true;}
+  });
+  canvas.addEventListener('wheel',function(e){
+    e.preventDefault();
+    var rect=canvas.getBoundingClientRect();
+    var sx=e.clientX-rect.left,sy=e.clientY-rect.top;
+    var factor=e.deltaY<0?1.12:1/1.12;
+    var newZoom=Math.max(0.25,Math.min(5,zoom*factor));
+    panX=sx-(sx-panX)*(newZoom/zoom);panY=sy-(sy-panY)*(newZoom/zoom);
+    zoom=newZoom;
+  },{passive:false});
+
+  // Touch pinch-zoom
+  var lastPinchDist=0;
+  canvas.addEventListener('touchstart',function(e){
+    if(e.touches.length===2){
+      var dx3=e.touches[0].clientX-e.touches[1].clientX;
+      var dy3=e.touches[0].clientY-e.touches[1].clientY;
+      lastPinchDist=Math.sqrt(dx3*dx3+dy3*dy3);
+    }
+  },{passive:true});
+  canvas.addEventListener('touchmove',function(e){
+    if(e.touches.length===2){
+      e.preventDefault();
+      var dx4=e.touches[0].clientX-e.touches[1].clientX;
+      var dy4=e.touches[0].clientY-e.touches[1].clientY;
+      var dist2=Math.sqrt(dx4*dx4+dy4*dy4);
+      if(lastPinchDist>0){
+        var factor2=dist2/lastPinchDist;
+        var rect2=canvas.getBoundingClientRect();
+        var sx2=(e.touches[0].clientX+e.touches[1].clientX)/2-rect2.left;
+        var sy2=(e.touches[0].clientY+e.touches[1].clientY)/2-rect2.top;
+        var nz=Math.max(0.25,Math.min(5,zoom*factor2));
+        panX=sx2-(sx2-panX)*(nz/zoom);panY=sy2-(sy2-panY)*(nz/zoom);zoom=nz;
+      }
+      lastPinchDist=dist2;
+    }
+  },{passive:false});
+
+  function showKGInfo(n){
+    var info=document.getElementById('kgraphInfo');
+    var g=_GLOSSARY_MAP.get(n.id);
+    var ext=GEXTRA[n.id];
+    var rels=(ext&&ext.r)||[];
+    var col=catColors[n.cat]||'#5b8def';
+    info.innerHTML='<button class="kgi-close" onclick="document.getElementById(\'kgraphInfo\').hidden=true">✕</button>'+
+      '<div class="kgi-cat" style="color:'+col+'">'+GCATS[n.cat].name+'</div>'+
+      '<div><span class="kgi-t">'+n.id+'</span><span class="kgi-cn">'+n.cn+'</span></div>'+
+      '<div class="kgi-e">'+(g?g.e:'')+'</div>'+
+      (rels.length?'<div class="kgi-rell">关联概念 · '+rels.length+'</div><div class="kgi-rel">'+rels.map(function(rn){return '<span class="kgi-chip" onclick="kgSelect(\''+rn.replace(/'/g,"\\'")+'\')">'+rn+'</span>';}).join('')+'</div>':'')+
+      '<div><span class="kgi-go" onclick="closeKGraph();go(\'#glossary\');setTimeout(function(){gotoTerm(\''+n.id.replace(/'/g,"\\'")+'\');},400)">在词典中查看 →</span></div>';
+    info.hidden=false;
+  }
+
+  _kg={inited:true,running:true,loop:loop,resize:resize,nodes:nodes,nodeMap:nodeMap,edges:edges,
+    select:function(id){var n=nodeMap.get(id);if(!n)return;selected=n;showKGInfo(n);simAlpha=Math.max(simAlpha,0.05);}
+  };
+  requestAnimationFrame(loop);
+}
+function kgSelect(en){if(_kg&&_kg.select)_kg.select(en);}
+function kgSearchFocus(q){
+  if(!_kg)return;
+  q=(q||'').trim().toLowerCase();
+  if(!q){_kg.nodes.forEach(function(n){n.targetAlpha=1;});document.getElementById('kgraphInfo').hidden=true;return;}
+  var match=_kg.nodes.find(function(n){return n.id.toLowerCase().includes(q)||n.cn.includes(q);});
+  if(match)_kg.select(match.id);
+}
+/* ============ localStorage user memory ============ */
+(function(){
+  var KEY='truenorth_visit';
+  function saveVisit(){
+    try{
+      var data=JSON.parse(localStorage.getItem(KEY)||'{}');
+      data.lastVisit=Date.now();
+      data.visitCount=(data.visitCount||0)+1;
+      var activeSection=document.querySelector('nav .navlinks a.active');
+      if(activeSection)data.lastSection=activeSection.getAttribute('data-spy')||'';
+      localStorage.setItem(KEY,JSON.stringify(data));
+    }catch(e){}
+  }
+  function markRead(deckId){
+    try{
+      var data=JSON.parse(localStorage.getItem(KEY)||'{}');
+      if(!data.read)data.read=[];
+      if(!data.read.includes(deckId))data.read.push(deckId);
+      localStorage.setItem(KEY,JSON.stringify(data));
+    }catch(e){}
+  }
+  function getVisitData(){
+    try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return{};}
+  }
+  // Save on visibility change (user leaving)
+  document.addEventListener('visibilitychange',function(){if(document.hidden)saveVisit();});
+  // Mark read when opening deck
+  var origOpenDeck=window.openDeck;
+  if(typeof origOpenDeck==='function'){
+    window.openDeck=function(id){
+      markRead(id);
+      return origOpenDeck.apply(this,arguments);
+    };
+  }
+  // Expose for other features
+  window._tnVisit={save:saveVisit,markRead:markRead,getData:getVisitData};
+  // Show welcome back hint if returning user
+  var vd=getVisitData();
+  if(vd.visitCount>1&&vd.lastSection){
+    var hint=document.createElement('div');
+    hint.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:900;background:#1d1d1f;color:#f5f5f7;font-size:13px;font-weight:500;padding:10px 20px;border-radius:980px;box-shadow:0 8px 24px rgba(0,0,0,.2);cursor:pointer;opacity:0;transition:opacity .4s,transform .4s;transform:translateX(-50%) translateY(10px)';
+    hint.textContent='欢迎回来 · 上次看到「'+vd.lastSection+'」→ 继续';
+    hint.onclick=function(){go('#'+vd.lastSection);hint.remove();};
+    document.body.appendChild(hint);
+    setTimeout(function(){hint.style.opacity='1';hint.style.transform='translateX(-50%) translateY(0)';},1000);
+    setTimeout(function(){hint.style.opacity='0';setTimeout(function(){hint.remove();},400);},8000);
+  }
+})();
+/* ============ Role-based quick path ============ */
+(function(){
+  var ROLES=[
+    {icon:'💼',name:'产品经理 / 运营',desc:'找 AI 增效场景、评估工具',path:['#signals','#toolkit','#feed'],label:'信号 → 方案 → 案例'},
+    {icon:'🛠',name:'开发 / 工程师',desc:'Agent 搭建、MCP、工作流编排',path:['#toolkit','#glossary','#workbench'],label:'方案 → 词典 → 工作台'},
+    {icon:'🎓',name:'研究生 / 学术',desc:'用 AI 辅助论文写作流程',path:['#workbench','#toolkit','#glossary'],label:'工作台 → 方案 → 词典'},
+    {icon:'📋',name:'公考 / 备考生',desc:'体系化备考 SOP + AI 辅助',path:['#workbench'],label:'场景工作台 · 公考'},
+    {icon:'🔰',name:'AI 零基础',desc:'从概念开始，逐步上手',path:['#glossary','#signals','#toolkit'],label:'词典 → 信号 → 方案'},
+    {icon:'👔',name:'管理者 / 决策者',desc:'看趋势判断、组织转型案例',path:['#insights','#feed','#signals'],label:'洞察 → 案例 → 信号'}
+  ];
+  var grid=document.getElementById('roleGrid');
+  if(!grid)return;
+  grid.innerHTML=ROLES.map(function(r){
+    var firstPath=r.path[0];
+    return '<div class="role-card" onclick="go(\''+firstPath+'\')">'+
+      '<div class="rc-icon">'+r.icon+'</div>'+
+      '<div class="rc-body"><div class="rc-name">'+r.name+'</div><div class="rc-desc">'+r.desc+'</div><div class="rc-path">'+r.label+' →</div></div></div>';
+  }).join('');
+})();
+
+/* Signals carousel scroll */
+function scrollSig(dir){
+  var grid=document.getElementById('sigGrid');
+  if(!grid)return;
+  var cardW=grid.querySelector('.sigcard')?.offsetWidth||340;
+  grid.scrollBy({left:dir*(cardW+16),behavior:'smooth'});
+}
+
+/* ============ Glossary mode switching ============ */
+function switchGlossMode(mode){
+  // graph and list are inline views; story and flash open full-screen overlays
+  if(mode==='story'){if(typeof openStory==='function')openStory();return;}
+  if(mode==='flash'){if(typeof openStudy==='function')openStudy();return;}
+  // Toggle inline views
+  document.getElementById('glossViewGraph').style.display=mode==='graph'?'':'none';
+  document.getElementById('glossViewList').style.display=mode==='list'?'':'none';
+  document.querySelectorAll('.gm-btn').forEach(function(b){
+    b.classList.toggle('active',b.dataset.gm===mode);
+  });
+  if(mode==='graph'){openKGraph();}
+  if(mode==='list'){buildGlossFilters();renderGloss();}
+}
+
+/* Auto-init graph when glossary section scrolls into view */
+(function(){
+  var glossSec=document.getElementById('glossary');
+  if(!glossSec||typeof IntersectionObserver==='undefined')return;
+  var inited=false;
+  var obs=new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting&&!inited){
+      inited=true;
+      openKGraph();
+      obs.disconnect();
+    }
+  },{threshold:0.15});
+  obs.observe(glossSec);
+})();
+
+/* ============ Unified Graph Experience ============ */
+(function(){
+  // Track explored nodes in localStorage
+  var EXPLORED_KEY='truenorth_explored';
+  function getExplored(){try{return JSON.parse(localStorage.getItem(EXPLORED_KEY)||'[]');}catch(e){return[];}}
+  function markExplored(en){
+    var list=getExplored();
+    if(!list.includes(en)){list.push(en);try{localStorage.setItem(EXPLORED_KEY,JSON.stringify(list));}catch(e){}}
+    updateExploredCount();
+    // Make explored nodes glow differently in graph
+    if(_kg&&_kg.nodes){
+      _kg.nodes.forEach(function(n){if(list.includes(n.id))n.explored=true;});
+    }
+  }
+  function updateExploredCount(){
+    var el=document.getElementById('exploredCount');
+    if(el)el.textContent=getExplored().length+' / '+GLOSSARY.length+' 已探索';
+  }
+  window._tnExplore={mark:markExplored,get:getExplored,update:updateExploredCount};
+
+  // On graph init, mark previously explored nodes
+  var origInit=window.initKGraph;
+  var patched=false;
+  function patchAfterInit(){
+    if(patched||!_kg||!_kg.nodes)return;
+    patched=true;
+    var explored=getExplored();
+    _kg.nodes.forEach(function(n){if(explored.includes(n.id))n.explored=true;});
+    updateExploredCount();
+  }
+  // Patch openKGraph to mark explored after init
+  var origOpen=window.openKGraph;
+  window.openKGraph=function(){
+    origOpen.apply(this,arguments);
+    setTimeout(patchAfterInit,200);
+  };
+
+  // Override the showKGInfo to also mark as explored and add richer interactions
+  var origShowKGInfo=null;
+  function waitForKG(){
+    if(!_kg){setTimeout(waitForKG,300);return;}
+    // The showKGInfo is inside initKGraph closure, we can't directly override it.
+    // Instead, we'll hook into click behavior via the info panel DOM.
+    // Add a MutationObserver on kgraphInfo to detect when a node is shown
+    var info=document.getElementById('kgraphInfo');
+    if(!info)return;
+    var obs=new MutationObserver(function(){
+      if(!info.hidden){
+        // Extract the term name from .kgi-t element
+        var tEl=info.querySelector('.kgi-t');
+        if(tEl){markExplored(tEl.textContent.trim());}
+      }
+    });
+    obs.observe(info,{attributes:true,attributeFilter:['hidden']});
+  }
+  setTimeout(waitForKG,500);
+
+  // Story Path Mode: highlight a guided path through the graph
+  window.startGraphStory=function(){
+    if(!_kg||!_kg.nodes){alert('请等待图谱加载完成');return;}
+    // Build path from GSTORY chapters — each chapter's terms in order
+    var chapters=GSTORY.map(function(ch){
+      return {cat:ch.cat,emoji:ch.emoji,title:ch.title,hook:ch.hook,
+        terms:GLOSSARY.filter(function(g){return g.cat===ch.cat;}).map(function(g){return g.en;})};
+    });
+    var chIdx=0,termIdx=0;
+    var storyActive=true;
+
+    function showChapterIntro(){
+      var ch=chapters[chIdx];
+      var info=document.getElementById('kgraphInfo');
+      info.innerHTML='<button class="kgi-close" onclick="endGraphStory()">✕</button>'+
+        '<div style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:6px">第 '+(chIdx+1)+' / '+chapters.length+' 章</div>'+
+        '<div style="font-size:22px;margin-bottom:8px">'+ch.emoji+' '+ch.title+'</div>'+
+        '<div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:16px">'+ch.hook+'</div>'+
+        '<div style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:14px">本章 '+ch.terms.length+' 个概念</div>'+
+        '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
+          '<button class="kgi-chip" onclick="storyNext()">在图谱上探索 →</button>'+
+          '<button class="kgi-chip" style="border-color:rgba(167,139,250,.5);color:#a78bfa" onclick="endGraphStory();openStory();if(typeof renderStoryChapter===\'function\')setTimeout(function(){renderStoryChapter('+chIdx+');},200)">📖 进入故事书</button>'+
+        '</div>';
+      info.hidden=false;
+    }
+
+    function storyNext(){
+      if(!storyActive)return;
+      var ch=chapters[chIdx];
+      if(termIdx>=ch.terms.length){
+        // Move to next chapter
+        chIdx++;termIdx=0;
+        if(chIdx>=chapters.length){
+          // Completed all
+          var info=document.getElementById('kgraphInfo');
+          info.innerHTML='<div style="text-align:center;padding:20px 0">'+
+            '<div style="font-size:32px;margin-bottom:8px">🎉</div>'+
+            '<div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:8px">全部 7 章探索完成</div>'+
+            '<div style="font-size:13px;color:rgba(255,255,255,.5)">已点亮 '+getExplored().length+' / '+GLOSSARY.length+' 个概念</div>'+
+            '<button class="kgi-chip" style="margin-top:14px" onclick="endGraphStory()">回到自由探索</button></div>';
+          var hint=document.querySelector('.kgraph-hint');
+          if(hint)hint.textContent='拖拽节点 · 滚轮缩放 · 点击查看';
+          storyActive=false;
+          return;
+        }
+        showChapterIntro();
+        return;
+      }
+      var en=ch.terms[termIdx];
+      if(_kg.select)_kg.select(en);
+      markExplored(en);
+      termIdx++;
+      // Override info panel to add story navigation
+      setTimeout(function(){
+        var info=document.getElementById('kgraphInfo');
+        if(!info||info.hidden)return;
+        var nav=document.createElement('div');
+        nav.style.cssText='margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;gap:8px';
+        nav.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center">'+
+          '<span style="font-size:11px;color:rgba(255,255,255,.35)">'+ch.emoji+' '+ch.title+' · '+termIdx+'/'+ch.terms.length+'</span>'+
+          '<button class="kgi-chip" onclick="storyNext()">'+(termIdx>=ch.terms.length?'下一章 →':'下一个 →')+'</button></div>'+
+          '<button class="kgi-chip" style="font-size:11px;border-color:rgba(167,139,250,.4);color:#a78bfa;align-self:flex-start" onclick="endGraphStory();openStory();setTimeout(function(){renderStoryChapter('+chIdx+');},200)">📖 想深读？进入故事书</button>';
+        info.appendChild(nav);
+      },120);
+    }
+    window.storyNext=storyNext;
+
+    window.endGraphStory=function(){
+      storyActive=false;
+      document.getElementById('kgraphInfo').hidden=true;
+      var hint=document.querySelector('.kgraph-hint');
+      if(hint)hint.textContent='拖拽节点 · 滚轮缩放 · 点击查看';
+    };
+
+    // Start
+    var hint=document.querySelector('.kgraph-hint');
+    if(hint)hint.innerHTML='📖 故事路径模式 · 7 章 · '+GLOSSARY.length+' 个概念';
+    showChapterIntro();
+  };
+
+  // Quiz Mode: flash a random unexplored node, user guesses
+  window.startGraphQuiz=function(){
+    if(!_kg||!_kg.nodes)return;
+    var explored=getExplored();
+    var unexplored=GLOSSARY.filter(function(g){return !explored.includes(g.en);});
+    if(!unexplored.length){unexplored=GLOSSARY;} // all explored, replay
+    var target=unexplored[Math.floor(Math.random()*unexplored.length)];
+    // Zoom to the node but don't show info yet
+    if(_kg.select)_kg.select(target.en);
+    // Show quiz prompt in the info panel
+    var info=document.getElementById('kgraphInfo');
+    info.innerHTML='<div style="text-align:center;padding:20px 0">'+
+      '<div style="font-size:14px;color:rgba(255,255,255,.4);margin-bottom:12px">这个概念是？</div>'+
+      '<div style="font-size:28px;font-weight:800;color:#fff;margin-bottom:16px">'+target.cn+'</div>'+
+      '<button class="kgi-chip" onclick="revealQuizAnswer(\''+target.en.replace(/'/g,"\\'")+'\')">翻面查看 ↻</button>'+
+      '<div style="margin-top:14px"><button class="kgi-chip" onclick="startGraphQuiz()">下一个 →</button></div></div>';
+    info.hidden=false;
+  };
+
+  window.revealQuizAnswer=function(en){
+    markExplored(en);
+    if(_kg&&_kg.select)_kg.select(en);
+    // The select will trigger showKGInfo which replaces the quiz content with real info
+  };
+})();
+
+/* ============ Insights judgment quiz ============ */
+/* ============ Insights: 数据猜猜看（从 DIGEST.data 动态取真实数据点） ============ */
+function startInsightQuiz(){
+  // 从 DIGEST.data 随机抽 5 条有数字的洞察
+  var pool=(DIGEST&&DIGEST.data)||[];
+  if(!pool.length){alert('数据未加载');return;}
+  var shuffled=pool.slice().sort(function(){return Math.random()-0.5;});
+  var questions=shuffled.slice(0,5);
+  var idx=0,score=0;
+  var answers=[];
+
+  var box=document.createElement('div');
+  box.style.cssText='position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(12px)';
+  box.id='insightQuizOv';
+
+  function renderQ(){
+    var q=questions[idx];
+    // 生成干扰选项：真实值 + 2 个伪造值
+    var realVal=q.n;
+    var fakes=generateFakes(realVal);
+    var options=[realVal,fakes[0],fakes[1]].sort(function(){return Math.random()-0.5;});
+
+    box.innerHTML='<div style="max-width:520px;width:100%;background:#161617;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:40px 32px;position:relative">'+
+      '<button onclick="closeInsightQuiz()" style="position:absolute;top:14px;right:14px;border:none;background:none;color:rgba(255,255,255,.3);font-size:18px;cursor:pointer">✕</button>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">'+
+        '<span style="font-size:12px;color:rgba(255,255,255,.4);font-weight:600">第 '+(idx+1)+' / '+questions.length+' 题</span>'+
+        '<span style="font-size:12px;color:#a78bfa;font-weight:600">得分 '+score+'</span>'+
+      '</div>'+
+      '<div style="font-size:16px;color:rgba(255,255,255,.6);line-height:1.5;margin-bottom:8px">'+q.t+'</div>'+
+      '<div style="font-size:13px;color:rgba(255,255,255,.3);margin-bottom:28px">来源：'+q.s+'</div>'+
+      '<div style="font-size:15px;color:rgba(255,255,255,.7);margin-bottom:18px;font-weight:600">这个数据是多少？</div>'+
+      '<div style="display:flex;flex-direction:column;gap:10px">'+
+        options.map(function(opt){
+          return '<button onclick="checkInsightAnswer(\''+encodeURIComponent(opt)+'\',\''+encodeURIComponent(realVal)+'\')" style="width:100%;font-size:17px;font-weight:700;padding:16px 20px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#f5f5f7;cursor:pointer;transition:.2s;text-align:center">'+opt+'</button>';
+        }).join('')+
+      '</div>'+
+    '</div>';
+  }
+
+  function generateFakes(real){
+    // 根据真实值格式生成合理的干扰项
+    var num=parseFloat(real.replace(/[^0-9.]/g,''));
+    var suffix=real.replace(/[0-9.]+/,'');
+    if(isNaN(num)){return [real.split('').reverse().join(''),real+'?'];}
+    var f1=Math.round(num*(0.4+Math.random()*0.4));
+    var f2=Math.round(num*(1.4+Math.random()*0.8));
+    if(f1===Math.round(num))f1=Math.round(num*0.3);
+    if(f2===Math.round(num))f2=Math.round(num*2.1);
+    // 保持原始格式
+    if(real.includes('%'))return [f1+'%',f2+'%'];
+    if(real.includes('×'))return [f1+'×',f2+'×'];
+    if(real.includes('+')){return ['+'+f1+suffix.replace('+',''),'+'+f2+suffix.replace('+','')];}
+    return [f1+suffix,f2+suffix];
+  }
+
+  window.checkInsightAnswer=function(chosen,correct){
+    chosen=decodeURIComponent(chosen);
+    correct=decodeURIComponent(correct);
+    var isRight=chosen===correct;
+    if(isRight)score++;
+    answers.push({q:questions[idx],chose:chosen,correct:correct,right:isRight});
+
+    // 显示结果
+    var q=questions[idx];
+    box.querySelector('div').innerHTML=
+      '<button onclick="closeInsightQuiz()" style="position:absolute;top:14px;right:14px;border:none;background:none;color:rgba(255,255,255,.3);font-size:18px;cursor:pointer">✕</button>'+
+      '<div style="text-align:center;margin-bottom:20px">'+
+        '<div style="font-size:48px;margin-bottom:8px">'+(isRight?'✅':'❌')+'</div>'+
+        '<div style="font-size:15px;color:'+(isRight?'#34c759':'#ff6b6b')+';font-weight:600">'+(isRight?'答对了！':'不对哦')+'</div>'+
+      '</div>'+
+      '<div style="background:rgba(255,255,255,.04);border-radius:14px;padding:20px;margin-bottom:20px">'+
+        '<div style="font-size:36px;font-weight:800;color:#fff;text-align:center;margin-bottom:8px">'+correct+'</div>'+
+        '<div style="font-size:14px;color:rgba(255,255,255,.6);text-align:center;line-height:1.5">'+q.t+'</div>'+
+        '<div style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;margin-top:6px">'+q.s+'</div>'+
+      '</div>'+
+      (idx<questions.length-1?
+        '<button onclick="nextInsightQ()" style="width:100%;font-size:14px;font-weight:600;padding:12px;border-radius:980px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;cursor:pointer">下一题 →</button>':
+        '<button onclick="showInsightResult()" style="width:100%;font-size:14px;font-weight:600;padding:12px;border-radius:980px;border:1px solid rgba(167,139,250,.4);background:rgba(167,139,250,.1);color:#a78bfa;cursor:pointer">看成绩 →</button>');
+  };
+
+  window.showInsightResult=function(){
+    var pct=Math.round(score/questions.length*100);
+    var grade=pct>=80?'🏆 数据达人':pct>=60?'📊 信息灵通':pct>=40?'🔍 继续关注':'📰 多看信号';
+    box.querySelector('div').innerHTML=
+      '<button onclick="closeInsightQuiz()" style="position:absolute;top:14px;right:14px;border:none;background:none;color:rgba(255,255,255,.3);font-size:18px;cursor:pointer">✕</button>'+
+      '<div style="text-align:center">'+
+        '<div style="font-size:48px;margin-bottom:12px">'+grade.split(' ')[0]+'</div>'+
+        '<div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:4px">'+grade.split(' ')[1]+'</div>'+
+        '<div style="font-size:42px;font-weight:800;color:#a78bfa;margin:16px 0">'+score+' / '+questions.length+'</div>'+
+        '<div style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:24px">答对 '+pct+'% · 数据来自 '+questions.length+' 个真实来源</div>'+
+        '<div style="display:flex;gap:10px;justify-content:center">'+
+          '<button onclick="closeInsightQuiz();startInsightQuiz()" style="font-size:13px;font-weight:600;padding:10px 20px;border-radius:980px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;cursor:pointer">再来一轮</button>'+
+          '<button onclick="closeInsightQuiz()" style="font-size:13px;font-weight:600;padding:10px 20px;border-radius:980px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.08);color:#a78bfa;cursor:pointer">返回</button>'+
+        '</div>'+
+      '</div>';
+    // 保存最佳成绩
+    try{
+      var best=parseInt(localStorage.getItem('truenorth_quiz_best')||'0');
+      if(score>best)localStorage.setItem('truenorth_quiz_best',String(score));
+    }catch(e){}
+  };
+
+  window.nextInsightQ=function(){idx++;renderQ();};
+  window.closeInsightQuiz=function(){box.remove();};
+
+  document.body.appendChild(box);
+  renderQ();
+}
+
+/* ============ Quickstart progress tracking ============ */
+(function(){
+  var ROUTE_KEY='truenorth_route';
+  function getVisited(){try{return JSON.parse(localStorage.getItem(ROUTE_KEY)||'[]');}catch(e){return[];}}
+  function markVisited(sectionId){
+    var list=getVisited();
+    if(!list.includes(sectionId)){
+      list.push(sectionId);
+      try{localStorage.setItem(ROUTE_KEY,JSON.stringify(list));}catch(e){}
+      // 即时反馈
+      var names={signals:'AI 信号',insights:'关键洞察',feed:'实战案例',toolkit:'方案库',workbench:'场景工作台',glossary:'AI 词典'};
+      if(typeof showToast==='function')showToast('✓ 到达「'+(names[sectionId]||sectionId)+'」· '+list.length+'/6 站');
+    }
+    updateRouteUI();
+  }
+  function updateRouteUI(){
+    var visited=getVisited();
+    document.querySelectorAll('.route-node').forEach(function(node){
+      var href=node.getAttribute('onclick')||'';
+      var match=href.match(/#([a-z]+)/);
+      if(match&&visited.includes(match[1])){
+        node.classList.add('visited');
+      }
+    });
+    // Update progress counter
+    var counter=document.getElementById('routeProgress');
+    if(counter)counter.textContent=visited.length+' / 6 站已到达';
+  }
+
+  // Track when user scrolls into each section
+  var sectionIds=['signals','insights','feed','toolkit','workbench','glossary'];
+  if(typeof IntersectionObserver!=='undefined'){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting&&e.intersectionRatio>0.3){
+          markVisited(e.target.id);
+        }
+      });
+    },{threshold:0.3});
+    sectionIds.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el)obs.observe(el);
+    });
+  }
+  // Init on load
+  setTimeout(updateRouteUI,500);
+})();
+
+/* ============ Toolkit: 任务挑战（用真实 TK_TASKS 数据 + 完成追踪） ============ */
+function startToolkitChallenge(){
+  // TK_TASKS 是 [['report','生成报告'],...] 格式
+  var tasks=(typeof TK_TASKS!=='undefined')?TK_TASKS:[];
+  if(!tasks.length){return;}
+  var CHALLENGE_KEY='truenorth_challenges';
+  function getChallenges(){try{return JSON.parse(localStorage.getItem(CHALLENGE_KEY)||'[]');}catch(e){return[];}}
+  function saveChallenge(taskId,items){
+    var list=getChallenges();
+    list.push({task:taskId,items:items.map(function(t){return t.id;}),time:Date.now(),done:false});
+    try{localStorage.setItem(CHALLENGE_KEY,JSON.stringify(list));}catch(e){}
+  }
+  function markChallengeDone(taskId){
+    var list=getChallenges();
+    for(var i=list.length-1;i>=0;i--){if(list[i].task===taskId&&!list[i].done){list[i].done=true;break;}}
+    try{localStorage.setItem(CHALLENGE_KEY,JSON.stringify(list));}catch(e){}
+  }
+
+  var box=document.createElement('div');
+  box.style.cssText='position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(12px)';
+  box.id='tkChallengeOv';
+
+  // 历史挑战统计
+  var history=getChallenges();
+  var doneCount=history.filter(function(c){return c.done;}).length;
+
+  // Step 1: 选任务
+  box.innerHTML='<div style="max-width:540px;width:100%;background:#fff;border-radius:22px;padding:36px 32px;position:relative;max-height:90vh;overflow-y:auto">'+
+    '<button onclick="closeTkChallenge()" style="position:absolute;top:14px;right:14px;border:none;background:none;font-size:18px;color:var(--ink3);cursor:pointer">✕</button>'+
+    '<div style="font-size:12px;font-weight:700;color:var(--c-build);letter-spacing:.04em;margin-bottom:6px">CHALLENGE MODE</div>'+
+    '<div style="font-size:24px;font-weight:700;margin-bottom:6px">你想完成什么？</div>'+
+    '<div style="font-size:14px;color:var(--ink2);margin-bottom:24px;line-height:1.5">选一个任务 → 系统推荐方案+Skill组合 → 跑完点「完成」。</div>'+
+    (doneCount?'<div style="font-size:12px;color:var(--c-build);font-weight:600;margin-bottom:16px;padding:8px 14px;background:rgba(52,199,89,.06);border-radius:10px">🏅 已完成 '+doneCount+' 次挑战</div>':'')+
+    '<div style="display:flex;flex-wrap:wrap;gap:10px">'+
+    tasks.map(function(t){
+      return '<button onclick="showChallengePath(\''+t[0]+'\')" style="font-size:14px;font-weight:600;padding:11px 20px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:.2s var(--ease)" onmouseenter="this.style.borderColor=\'var(--c-build)\';this.style.background=\'rgba(52,199,89,.04)\'" onmouseleave="this.style.borderColor=\'var(--line)\';this.style.background=\'#fff\'">'+t[1]+'</button>';
+    }).join('')+
+    '</div></div>';
+
+  window.showChallengePath=function(taskId){
+    // 用 tkData 获取完整数据（含 skills）
+    var matches=[];
+    TOOLKIT.forEach(function(raw){
+      var t=tkData(raw.id);
+      if(t.task&&t.task.includes(taskId))matches.push(t);
+    });
+    if(!matches.length){matches=TOOLKIT.slice(0,3).map(function(r){return tkData(r.id);});}
+    matches=matches.slice(0,4);
+
+    // 收集相关 Skill
+    var skills=[];
+    matches.forEach(function(t){
+      if(t.skills)t.skills.filter(function(s){return !s.hidden;}).slice(0,2).forEach(function(s){
+        if(!skills.find(function(x){return x.id===s.id;}))skills.push(s);
+      });
+    });
+
+    var taskName=TK_TASKMAP[taskId]||taskId;
+    saveChallenge(taskId,matches);
+
+    box.innerHTML='<div style="max-width:540px;width:100%;background:#fff;border-radius:22px;padding:36px 32px;position:relative;max-height:90vh;overflow-y:auto">'+
+      '<button onclick="closeTkChallenge()" style="position:absolute;top:14px;right:14px;border:none;background:none;font-size:18px;color:var(--ink3);cursor:pointer">✕</button>'+
+      '<div style="font-size:12px;font-weight:700;color:var(--c-build);letter-spacing:.04em;margin-bottom:6px">YOUR PATH</div>'+
+      '<div style="font-size:22px;font-weight:700;margin-bottom:6px">'+taskName+'</div>'+
+      '<div style="font-size:13px;color:var(--ink3);margin-bottom:24px">按顺序走完，预计 30 分钟内可跑通第一个</div>'+
+      '<div style="display:flex;flex-direction:column;gap:12px;position:relative;padding-left:20px">'+
+        '<div style="position:absolute;left:8px;top:14px;bottom:14px;width:2px;background:linear-gradient(to bottom,var(--c-build),rgba(52,199,89,.1));border-radius:2px"></div>'+
+        matches.map(function(t,i){
+          var time=t.time||'10 分钟';
+          var level=t.level||'';
+          return '<div style="display:flex;align-items:flex-start;gap:14px;padding:16px 18px;background:var(--bg2);border-radius:14px;cursor:pointer;transition:.2s;position:relative" onclick="closeTkChallenge();openTkDetail(\''+t.id+'\')" onmouseenter="this.style.background=\'#eef9f0\'" onmouseleave="this.style.background=\'var(--bg2)\'">'+
+            '<div style="position:absolute;left:-16px;top:20px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--c-build)"></div>'+
+            '<div style="flex:1"><div style="font-size:15px;font-weight:700;color:var(--ink)">'+t.name+'</div>'+
+              '<div style="font-size:13px;color:var(--ink2);margin-top:3px;line-height:1.45">'+(t.summary||'').slice(0,80)+'</div>'+
+              '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'+
+                (level?'<span style="font-size:11px;font-weight:600;padding:3px 9px;border-radius:980px;background:rgba(52,199,89,.08);color:var(--c-build)">'+level+'</span>':'')+
+                '<span style="font-size:11px;font-weight:600;padding:3px 9px;border-radius:980px;background:var(--bg);color:var(--ink3)">⏱ '+time+'</span>'+
+              '</div>'+
+            '</div></div>';
+        }).join('')+
+      '</div>'+
+      (skills.length?'<div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)"><div style="font-size:12px;font-weight:700;color:var(--ink3);margin-bottom:10px">配套 Skill 组合拳</div><div style="display:flex;flex-wrap:wrap;gap:8px">'+
+        skills.map(function(s){return '<span style="font-size:12px;font-weight:600;padding:5px 13px;border-radius:980px;background:var(--bg2);color:var(--ink2);cursor:pointer;transition:.2s" onclick="closeTkChallenge();goSkill(\''+s.id+'\')" onmouseenter="this.style.background=\'rgba(167,139,250,.1)\';this.style.color=\'#7c3aed\'" onmouseleave="this.style.background=\'var(--bg2)\';this.style.color=\'var(--ink2)\'">'+s.name+'</span>';}).join('')+
+      '</div></div>':'')+
+      '<div style="margin-top:24px;display:flex;gap:10px">'+
+        '<button onclick="closeTkChallenge();openTkDetail(\''+matches[0].id+'\')" style="flex:1;font-size:14px;font-weight:600;padding:13px;border-radius:14px;border:none;background:var(--c-build);color:#fff;cursor:pointer">从第 1 步开始 →</button>'+
+        '<button onclick="markChallengeDone(\''+taskId+'\');closeTkChallenge();showToast(\'🏅 挑战完成！\')" style="font-size:14px;font-weight:600;padding:13px 20px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink2);cursor:pointer">✓ 我跑完了</button>'+
+      '</div>'+
+    '</div>';
+  };
+
+  window.closeTkChallenge=function(){box.remove();};
+  document.body.appendChild(box);
+}
+
+/* ============ Global toast notification ============ */
+function showToast(msg,duration){
+  duration=duration||3000;
+  var t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);z-index:3000;background:#1d1d1f;color:#f5f5f7;font-size:14px;font-weight:600;padding:12px 24px;border-radius:980px;box-shadow:0 8px 30px rgba(0,0,0,.25);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none';
+  t.textContent=msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(function(){t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';});
+  setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(12px)';setTimeout(function(){t.remove();},300);},duration);
+}
 </script>
 </body>
 </html>
