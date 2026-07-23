@@ -26,3 +26,7 @@ Thumbs.db
 
 # 根目录聊天导出（私有）
 Kiro聊天记录_*
+
+# 本地优化工作副本与版本备份（不进仓库）
+fable-opt/
+fable-opt-backups/
